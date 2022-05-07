@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:resx="clr-namespace:RimWorldModBrowser"
              xmlns:local="clr-namespace:RimWorldModBrowser.Components"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -13,7 +14,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" Style="{StaticResource TitleBar}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
@@ -21,35 +22,37 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding Path=Model.Name}"/>
-            <Button Grid.Column="1" Width="32" Height="32" IsEnabled="{Binding Path=Model.HasSteamId}">
-
+            <Label Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource TitleLabel}" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding Path=Model.Name}"/>
+            <Button Grid.Column="1" Width="32" Height="32" IsEnabled="{Binding Path=Model.HasSteamId}" Click="SteamClick">
+                <Image Source="pack://application:,,,/images/steam.png" Height="24"/>
             </Button>
 
-            <Button Grid.Column="2" Width="32" Height="32" IsEnabled="{Binding Path=Model.HasDlls}">
-
+            <Button Grid.Column="2" Width="32" Height="32" IsEnabled="{Binding Path=Model.HasDlls}" Click="DnSpyClick">
+                <Image Source="pack://application:,,,/images/dnspy.png" Height="24"/>
             </Button>
 
-            <Button Grid.Column="3" Width="32" Height="32">
-
+            <Button Grid.Column="3" Width="32" Height="32" Click="FolderClick">
+                <Image Source="pack://application:,,,/images/folder.png" Height="24"/>
             </Button>
         </Grid>
-        <Image Grid.Row="1" Width="400" Height="225"/>
+        <Border Grid.Row="1" BorderBrush="{StaticResource ButtonBorder}" BorderThickness="0 0 0 1">
+            <Image Width="400" Height="225" Stretch="UniformToFill"/>
+        </Border>
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <Label VerticalAlignment="Center" FontStyle="Italic" Content="By"/>
-                <TextBlock VerticalAlignment="Center" FontStyle="Italic" Text="{Binding Path=Model.Author}"/>
+            <StackPanel Orientation="Vertical" Grid.Row="0" Style="{StaticResource Modern}">
+                <Label Grid.Row="0" VerticalAlignment="Center" FontStyle="Italic" Content="{Binding Path=Model.AuthorString}"/>
+                <Label Grid.Row="1" Content="{x:Static resx:Strings.ModDescription}"/>
             </StackPanel>
-            <Label Grid.Row="1" Content="Mod Description:"/>
-            <ScrollViewer Grid.Row="2">
-                <TextBlock Margin="6" TextWrapping="WrapWithOverflow" Text="{Binding Path=Model.Description}"/>
-            </ScrollViewer>
+            <Border Grid.Row="1" BorderBrush="{StaticResource ButtonBorder}" BorderThickness="0 1 0 0">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <TextBlock Margin="6" TextWrapping="WrapWithOverflow" Text="{Binding Path=Model.Description}"/>
+                </ScrollViewer>
+            </Border>
         </Grid>
     </Grid>
 </UserControl>

@@ -117,6 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AuthorBy" xml:space="preserve">
+    <value>By {0}</value>
+    <comment>Used to show credit to the developer that made the mod</comment>
+  </data>
+  <data name="ModDescription" xml:space="preserve">
+    <value>Mod Description:</value>
+    <comment>Used to denote the text field that shows the mod's description</comment>
+  </data>
   <data name="SearchGhostText" xml:space="preserve">
     <value>Search...</value>
     <comment>The string used to inform the user that typing in this text box searches the mod list</comment>

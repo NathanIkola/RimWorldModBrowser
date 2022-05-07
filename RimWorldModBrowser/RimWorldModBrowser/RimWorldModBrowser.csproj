@@ -7,7 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\dnspy.png" />
+    <None Remove="Images\folder.png" />
+    <None Remove="Images\settings.png" />
+    <None Remove="Images\steam.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.3.0" />
+    <PackageReference Include="WPFThemes.DarkBlend" Version="1.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\dnspy.png" />
+    <Resource Include="Images\folder.png" />
+    <Resource Include="Images\settings.png" />
+    <Resource Include="Images\steam.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,7 +35,7 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Strings.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>

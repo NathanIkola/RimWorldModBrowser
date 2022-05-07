@@ -5,21 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:components="clr-namespace:RimWorldModBrowser.Components"
         xmlns:local="clr-namespace:RimWorldModBrowser"
+        Style="{StaticResource {x:Type Window}}"
         mc:Ignorable="d"
         Loaded="OnLoad"
         Title="Mod Browser" Height="450" Width="800">
     <DockPanel>
-        <StatusBar DockPanel.Dock="Bottom">
+        <StatusBar Padding="0" DockPanel.Dock="Bottom">
             <StatusBarItem Content="{Binding Path=Model.StatusString}" />
+            <Separator Width="1" Background="{StaticResource ButtonBorder}"/>
+            <StatusBarItem HorizontalAlignment="Right" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <Button>
+                    <Image Source="images/settings.png" Height="16"/>
+                </Button>
+            </StatusBarItem>
         </StatusBar>
         <Grid DockPanel.Dock="Top">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" MinWidth="300"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <components:ModList Grid.Column="0" Mods="{Binding Path=Model.LoadedMods}" FilteredModCount="{Binding Path=Model.FilteredModCount}" SelectionChanged="HandleSelectionChanged" TextChanged="HandleTextChanged"/>
-            <components:SelectedMod Grid.Column="1" Model="{Binding Path=Model.SelectedMod}" />
+            <components:ModList Grid.Column="0" Mods="{Binding Path=Model.LoadedMods}" FilteredModCount="{Binding Path=Model.FilteredModCount}" CurrentlySelectedMod="{Binding Path=Model.SelectedMod}"/>
+            <components:SelectedMod Grid.Column="1" Model="{Binding Path=Model.SelectedMod}"/>
         </Grid>
     </DockPanel>
 </Window>

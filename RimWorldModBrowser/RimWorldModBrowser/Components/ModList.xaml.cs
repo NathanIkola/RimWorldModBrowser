@@ -82,6 +82,15 @@ namespace RimWorldModBrowser.Components
             get { return (string)GetValue(GhostTextProperty); }
             set { SetValue(GhostTextProperty, value); }
         }
+
+        /// <summary>
+        /// The mod that's currently selected in the list
+        /// </summary>
+        public ModConcept CurrentlySelectedMod
+        {
+            get { return (ModConcept)GetValue(CurrentlySelectedModProperty); }
+            set { SetValue(CurrentlySelectedModProperty, value); }
+        }
         #endregion
 
         #region Private fields
@@ -92,16 +101,6 @@ namespace RimWorldModBrowser.Components
         #endregion
 
         #region Events
-        /// <summary>
-        /// The handler for when the selection changes
-        /// </summary>
-        public event SelectionChangedEventHandler SelectionChanged;
-
-        /// <summary>
-        /// The handler for when the text changes
-        /// </summary>
-        public event TextChangedEventHandler TextChanged;
-
         /// <summary>
         /// The handler for when a property changes
         /// </summary>
@@ -161,13 +160,22 @@ namespace RimWorldModBrowser.Components
             {
                 BindsTwoWayByDefault = true,
             });
+
+        /// <summary>
+        /// The property that makes CurrentlySelectedMod bindable
+        /// </summary>
+        public static readonly DependencyProperty CurrentlySelectedModProperty =
+            DependencyProperty.Register(nameof(CurrentlySelectedMod), typeof(ModConcept), typeof(ModList), new FrameworkPropertyMetadata
+            {
+                BindsTwoWayByDefault= true,
+            });
         #endregion
 
         #region Dependency property callbacks
         /// <summary>
         /// The callback fired when the Mods property gets updated
         /// </summary>
-        private static PropertyChangedCallback OnModsPropertyChanged = delegate (DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static readonly PropertyChangedCallback OnModsPropertyChanged = delegate (DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is ModList modList)
                 modList.FilteredModList = new((ModCollection)e.NewValue);
@@ -209,17 +217,10 @@ namespace RimWorldModBrowser.Components
                 }
             }
             FilteredModCount = FilteredModList.Count;
-            TextChanged?.Invoke(this, e);
-        }
-
-        /// <summary>
-        /// Passthrough for invoking the SelectionChanged handler created in this component
-        /// </summary>
-        /// <param name="sender">The object triggering the event</param>
-        /// <param name="e">The event arguments</param>
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            SelectionChanged?.Invoke(sender, e);
+            if (!FilteredModList.Contains(CurrentlySelectedMod))
+            {
+                CurrentlySelectedMod = FilteredModCount > 0 ? FilteredModList[0] : null;
+            }
         }
         #endregion
     }

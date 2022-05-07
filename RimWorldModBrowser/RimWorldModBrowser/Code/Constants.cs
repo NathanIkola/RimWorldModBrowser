@@ -15,6 +15,11 @@
         /// The key used to store the RimWorld Steam Workshop directory
         /// </summary>
         public static readonly string WorkshopDirKey = "WorkshopDir";
+
+        /// <summary>
+        /// The key used to store the path to DnSpy
+        /// </summary>
+        public static readonly string DnSpyPath = "DnSpyPath";
         #endregion
     }
 }

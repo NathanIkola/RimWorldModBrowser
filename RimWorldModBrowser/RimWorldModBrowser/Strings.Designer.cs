@@ -22,7 +22,7 @@ namespace RimWorldModBrowser {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Strings {
+    public class Strings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace RimWorldModBrowser {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RimWorldModBrowser.Strings", typeof(Strings).Assembly);
@@ -51,7 +51,7 @@ namespace RimWorldModBrowser {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,9 +61,27 @@ namespace RimWorldModBrowser {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to By {0}.
+        /// </summary>
+        public static string AuthorBy {
+            get {
+                return ResourceManager.GetString("AuthorBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mod Description:.
+        /// </summary>
+        public static string ModDescription {
+            get {
+                return ResourceManager.GetString("ModDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search....
         /// </summary>
-        internal static string SearchGhostText {
+        public static string SearchGhostText {
             get {
                 return ResourceManager.GetString("SearchGhostText", resourceCulture);
             }
@@ -72,7 +90,7 @@ namespace RimWorldModBrowser {
         /// <summary>
         ///   Looks up a localized string similar to Showing {0} out of {1} mods.
         /// </summary>
-        internal static string StatusBarLoadCount {
+        public static string StatusBarLoadCount {
             get {
                 return ResourceManager.GetString("StatusBarLoadCount", resourceCulture);
             }
@@ -81,7 +99,7 @@ namespace RimWorldModBrowser {
         /// <summary>
         ///   Looks up a localized string similar to Showing {0} out of {1} mod.
         /// </summary>
-        internal static string StatusBarLoadCountSingular {
+        public static string StatusBarLoadCountSingular {
             get {
                 return ResourceManager.GetString("StatusBarLoadCountSingular", resourceCulture);
             }

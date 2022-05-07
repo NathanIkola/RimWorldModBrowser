@@ -23,7 +23,7 @@ namespace RimWorldModBrowser.Code.ViewModels
         /// </summary>
         public void LoadMods()
         {
-            List<ModConcept> mods = new List<ModConcept>();
+            List<ModConcept> mods = new();
             string rwInstallDir = Settings.Lookup(Constants.RWInstallDirKey);
             string workshopDir = Settings.Lookup(Constants.WorkshopDirKey);
 
@@ -38,26 +38,6 @@ namespace RimWorldModBrowser.Code.ViewModels
         #endregion
 
         #region Event handlers
-        /// <summary>
-        /// The code run when the selected mod is changed
-        /// </summary>
-        /// <param name="sender">The control that spawned this event</param>
-        /// <param name="e">The arguments for this event</param>
-        public void HandleSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Model.SelectedMod = e.AddedItems[0] as ModConcept;
-        }
-
-        /// <summary>
-        /// The code run when the text is updated in the 
-        /// </summary>
-        /// <param name="sender">The control that spawned this event</param>
-        /// <param name="e">The arguments for this event</param>
-        public void HandleTextChanged(object sender, TextChangedEventArgs e)
-        {
-            Model.StatusString = GetStatusBarString(Model.FilteredModCount, Model.LoadedMods.Count);
-        }
-
         /// <summary>
         /// The code run when the window loads
         /// </summary>
@@ -77,7 +57,7 @@ namespace RimWorldModBrowser.Code.ViewModels
         /// <param name="filterCount">The number of mods that passed the filter</param>
         /// <param name="totalCount">The number of mods in total</param>
         /// <returns>A singular or plural string from the resources file with the numbers injected as appropriate</returns>
-        private string GetStatusBarString(int filterCount, int totalCount)
+        private static string GetStatusBarString(int filterCount, int totalCount)
         {
             string baseStr = (totalCount > 1) 
                 ? Strings.StatusBarLoadCount 

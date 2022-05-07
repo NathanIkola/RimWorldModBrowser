@@ -1,4 +1,5 @@
 ﻿using RimWorldModBrowser.Code;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -36,5 +37,63 @@ namespace RimWorldModBrowser.Components
                 BindsTwoWayByDefault = true,
             });
         #endregion
+
+        /// <summary>
+        /// The event raised when the user attempts to open the Steam Workshop link for this mod
+        /// </summary>
+        /// <param name="sender">The control that spawned this event</param>
+        /// <param name="e">The arguments for this event</param>
+        private void SteamClick(object sender, RoutedEventArgs e)
+        {
+            if (Model is null) return;
+            string url = @"https://steamcommunity.com/sharedfiles/filedetails/?id=" + Model.SteamId;
+
+            ProcessStartInfo startInfo = new()
+            {
+                FileName = url,
+                UseShellExecute = true,
+                Verb = "open"
+            };
+            Process.Start(startInfo);
+        }
+
+        /// <summary>
+        /// The event raised when the user attempts to open DnSpy for this mod's assemblies
+        /// </summary>
+        /// <param name="sender">The control that spawned this event</param>
+        /// <param name="e">The arguments for this event</param>
+        private void DnSpyClick(object sender, RoutedEventArgs e)
+        {
+            if (Model is null) return;
+            string dnSpyPath = Settings.Lookup(Constants.DnSpyPath);
+            if (string.IsNullOrWhiteSpace(dnSpyPath)) return;
+
+            ProcessStartInfo startInfo = new()
+            {
+                FileName = dnSpyPath
+            };
+            Process.Start(startInfo);
+
+            foreach (string dll in Model.DllPaths)
+                startInfo.ArgumentList.Add(dll);
+        }
+
+        /// <summary>
+        /// The event raised when the user attempts to open the folder for this mod
+        /// </summary>
+        /// <param name="sender">The control that spawned this event</param>
+        /// <param name="e">The arguments for this event</param>
+        private void FolderClick(object sender, RoutedEventArgs e)
+        {
+            if (Model is null) return;
+
+            ProcessStartInfo startInfo = new()
+            {
+                FileName = Model.Path,
+                UseShellExecute = true,
+                Verb = "open"
+            };
+            Process.Start(startInfo);
+        }
     }
 }

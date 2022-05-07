@@ -18,35 +18,13 @@ namespace RimWorldModBrowser
             Settings.Load();
             ViewModel.LoadMods();
 
-            ViewModel.Model.LoadedMods.Add(new() { Author = "test", Description = "test", Name = "test" });
+            ViewModel.Model.LoadedMods.Add(new() { Author = "test", Description = "This is a very long description that, ideally, will make the scolling go absolutely nuts here. My hopes aren't all that high, however, because the space it renders in is actually somewhat vast.\n\n\n\n\n hello", Name = "test", Path= @"C:\" });
         }
 
         /// <summary>
         /// The view model for this window
         /// </summary>
-        private MainViewModel ViewModel = new();
-
-        #region Event handlers
-        /// <summary>
-        /// Passthrough to the view model
-        /// </summary>
-        /// <param name="sender">The control that spawned this event</param>
-        /// <param name="e">The arguments for this event</param>
-        public void HandleSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ViewModel.HandleSelectionChanged(sender, e);
-        }
-        #endregion
-
-        /// <summary>
-        /// Passthrough to the view model
-        /// </summary>
-        /// <param name="sender">The control that spawned this event</param>
-        /// <param name="e">The arguments for this event</param>
-        private void HandleTextChanged(object sender, TextChangedEventArgs e)
-        {
-            ViewModel.HandleTextChanged(sender, e);
-        }
+        private readonly MainViewModel ViewModel = new();
 
         /// <summary>
         /// Passthrough to the view model

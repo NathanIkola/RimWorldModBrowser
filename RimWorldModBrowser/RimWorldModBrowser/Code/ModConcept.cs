@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Xml;
 
 namespace RimWorldModBrowser.Code
@@ -20,6 +21,11 @@ namespace RimWorldModBrowser.Code
         /// The mod's author
         /// </summary>
         public string Author { get; set; }
+
+        /// <summary>
+        /// The string the view can bind to that displays the author's name
+        /// </summary>
+        public string AuthorString => Strings.AuthorBy.Replace("{0}", Author);
 
         /// <summary>
         /// The mod's description
@@ -77,6 +83,12 @@ namespace RimWorldModBrowser.Code
                     if (!string.IsNullOrEmpty(id))
                         steamId = id;
             }
+            else
+            {
+                steamIdPath = steamId.Replace(@"About\PublishedFileId.txt", "");
+                if (steamIdPath.Contains("294100"))
+                    steamId = System.IO.Path.GetDirectoryName(steamIdPath + @"\").Split(@"\").Last();
+            }
 
             string modPath = xmlPath.Replace(@"\About\About.xml", "");
 
@@ -103,7 +115,7 @@ namespace RimWorldModBrowser.Code
         /// <returns>A list of DLL paths</returns>
         private static List<string> GetDlls(string modPath)
         {
-            List<string> dlls = new List<string>();
+            List<string> dlls = new();
             foreach(string file in Directory.GetFiles(modPath,"*.dll"))
                 dlls.Add(file);
 

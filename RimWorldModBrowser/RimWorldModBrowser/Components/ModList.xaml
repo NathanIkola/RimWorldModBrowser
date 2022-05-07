@@ -11,10 +11,12 @@
     <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <xctk:WatermarkTextBox x:Name="tb_searchBox" VerticalAlignment="Center" Style="{Binding Path=TextBoxStyle}" TextChanged="SearchBox_TextChanged" Watermark="{Binding Path=GhostText}" />
-        <ListBox Grid.Row="1" ItemsSource="{Binding Path=FilteredModList}" SelectionChanged="ListBox_SelectionChanged" Style="{Binding Path=ListBoxStyle}"/>
+        <StackPanel Style="{StaticResource Modern}">
+            <xctk:WatermarkTextBox Grid.Row="0" Height="32" x:Name="tb_searchBox" VerticalAlignment="Center" TextChanged="SearchBox_TextChanged" Watermark="{Binding Path=GhostText}" />
+        </StackPanel>
+        <ListBox Grid.Row="1" ItemsSource="{Binding Path=FilteredModList}" SelectedItem="{Binding Path=CurrentlySelectedMod}"/>
     </Grid>
 </UserControl>
