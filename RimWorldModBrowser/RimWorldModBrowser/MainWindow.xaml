@@ -18,7 +18,8 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <components:ModList x:Name="uc_modList" Mods="{Binding Path=Model.LoadedMods}" FilteredModCount="{Binding Path=Model.FilteredModCount}" SelectionChanged="HandleSelectionChanged" TextChanged="HandleTextChanged"/>
+            <components:ModList Grid.Column="0" Mods="{Binding Path=Model.LoadedMods}" FilteredModCount="{Binding Path=Model.FilteredModCount}" SelectionChanged="HandleSelectionChanged" TextChanged="HandleTextChanged"/>
+            <components:SelectedMod Grid.Column="1" Model="{Binding Path=Model.SelectedMod}" />
         </Grid>
     </DockPanel>
 </Window>

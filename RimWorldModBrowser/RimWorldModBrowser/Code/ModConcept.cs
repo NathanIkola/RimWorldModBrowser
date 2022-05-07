@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Xml;
 
@@ -29,6 +30,26 @@ namespace RimWorldModBrowser.Code
         /// The path to the mod's root folder
         /// </summary>
         public string Path { get; set; }
+
+        /// <summary>
+        /// The list of paths to the DLLs for this mod
+        /// </summary>
+        public List<string> DllPaths { get; set; }
+
+        /// <summary>
+        /// Returns whether or not this mod has DLLs available
+        /// </summary>
+        public bool HasDlls => (DllPaths?.Count ?? 0) > 0;
+
+        /// <summary>
+        /// The mod ID for the mod (if present)
+        /// </summary>
+        public string SteamId { get; set; }
+
+        /// <summary>
+        /// Returns whether or not this mod has an associated Steam ID
+        /// </summary>
+        public bool HasSteamId => !string.IsNullOrEmpty(SteamId);
         #endregion
 
         #region Static methods
@@ -46,18 +67,50 @@ namespace RimWorldModBrowser.Code
             XmlDocument aboutXml = new();
             aboutXml.Load(xmlPath);
 
+            // attempt to get the Steam ID
+            string steamIdPath = xmlPath.Replace("About.xml", "PublishedFileId.txt");
+            string steamId = null;
+            if (File.Exists(steamIdPath))
+            {
+                string[] steamIds = File.ReadAllLines(steamIdPath);
+                foreach (string id in steamIds)
+                    if (!string.IsNullOrEmpty(id))
+                        steamId = id;
+            }
+
+            string modPath = xmlPath.Replace(@"\About\About.xml", "");
+
             ModConcept concept = new()
             {
                 Name = GetElementByTagName(aboutXml, "name"),
                 Author = GetElementByTagName(aboutXml, "author"),
                 Description = GetElementByTagName(aboutXml, "description"),
-                Path = xmlPath.Replace(@"About\About.xml", "")
+                Path = xmlPath.Replace(@"About\About.xml", ""),
+                SteamId = steamId,
+                DllPaths = GetDlls(modPath)
             };
 
             while (concept.Description is not null && (concept.Description.StartsWith("\n") || concept.Description.StartsWith("\r")))
                 concept.Description = concept.Description.TrimStart('\r').TrimStart('\n');
 
             return concept;
+        }
+
+        /// <summary>
+        /// Search the entire directory for DLLs and return their paths
+        /// </summary>
+        /// <param name="modPath">The path to check</param>
+        /// <returns>A list of DLL paths</returns>
+        private static List<string> GetDlls(string modPath)
+        {
+            List<string> dlls = new List<string>();
+            foreach(string file in Directory.GetFiles(modPath,"*.dll"))
+                dlls.Add(file);
+
+            foreach (string directory in Directory.GetDirectories(modPath))
+                dlls.AddRange(GetDlls(directory));
+
+            return dlls;
         }
 
         /// <summary>

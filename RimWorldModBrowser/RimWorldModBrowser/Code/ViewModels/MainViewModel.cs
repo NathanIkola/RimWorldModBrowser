@@ -1,5 +1,4 @@
 ﻿using RimWorldModBrowser.Code.Models;
-using RimWorldModBrowser.Components;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -46,7 +45,7 @@ namespace RimWorldModBrowser.Code.ViewModels
         /// <param name="e">The arguments for this event</param>
         public void HandleSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            Model.SelectedMod = e.AddedItems[0] as ModConcept;
         }
 
         /// <summary>
