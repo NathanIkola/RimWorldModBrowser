@@ -1,7 +1,6 @@
 ﻿using RimWorldModBrowser.Code.Models;
 using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Controls;
+using System.ComponentModel;
 
 namespace RimWorldModBrowser.Code.ViewModels
 {
@@ -16,6 +15,11 @@ namespace RimWorldModBrowser.Code.ViewModels
         /// </summary>
         public MainModel Model { get; set; } = new MainModel();
         #endregion
+
+        public MainViewModel()
+        {
+            Model.PropertyChanged += OnModelPropertyChanged;
+        }
 
         #region Public methods
         /// <summary>
@@ -33,20 +37,24 @@ namespace RimWorldModBrowser.Code.ViewModels
             if (!string.IsNullOrWhiteSpace(workshopDir))
                 mods.AddRange(ModReader.GetModsInDirectory(workshopDir));
 
+            mods.Sort();
+
             Model.LoadedMods = new(mods);
         }
         #endregion
 
         #region Event handlers
         /// <summary>
-        /// The code run when the window loads
+        /// The code run when a property in the model is updated
         /// </summary>
         /// <param name="sender">The control that spawned this event</param>
         /// <param name="e">The arguments for this event</param>
-        public void OnLoad(object sender, RoutedEventArgs e)
+        public void OnModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            // on loading the filtered mod count isn't set yet so just use the total count
-            Model.StatusString = GetStatusBarString(Model.LoadedMods.Count, Model.LoadedMods.Count);
+            if (e.PropertyName == nameof(Model.FilteredModCount))
+            {
+                Model.StatusString = GetStatusBarString(Model.FilteredModCount, Model.LoadedMods.Count);
+            }
         }
         #endregion
 

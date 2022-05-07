@@ -70,6 +70,51 @@ namespace RimWorldModBrowser {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Browse....
+        /// </summary>
+        public static string BrowseButton {
+            get {
+                return ResourceManager.GetString("BrowseButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string CancelCaption {
+            get {
+                return ResourceManager.GetString("CancelCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to dnSpy Path:.
+        /// </summary>
+        public static string dnSpyPath {
+            get {
+                return ResourceManager.GetString("dnSpyPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The dnSpy path specified does not exist.
+        /// </summary>
+        public static string dnSpyPathBadError {
+            get {
+                return ResourceManager.GetString("dnSpyPathBadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Done.
+        /// </summary>
+        public static string DoneCaption {
+            get {
+                return ResourceManager.GetString("DoneCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mod Description:.
         /// </summary>
         public static string ModDescription {
@@ -79,11 +124,74 @@ namespace RimWorldModBrowser {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The RimWorld Mods Directory specified does not exist.
+        /// </summary>
+        public static string RWModsDirBadError {
+            get {
+                return ResourceManager.GetString("RWModsDirBadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RimWorld Local Mods Directory (RimWorld\Mods):.
+        /// </summary>
+        public static string RWModsDirectoryCaption {
+            get {
+                return ResourceManager.GetString("RWModsDirectoryCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The RimWorld Mods Directory specified appears to be incorrect.
+        /// </summary>
+        public static string RWModsDirIncorrectError {
+            get {
+                return ResourceManager.GetString("RWModsDirIncorrectError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The RimWorld Workshop Directory specified does not exist.
+        /// </summary>
+        public static string RWWorkshopBadError {
+            get {
+                return ResourceManager.GetString("RWWorkshopBadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RimWorld Workshop Directory (Game ID: 294100):.
+        /// </summary>
+        public static string RWWorkshopCaption {
+            get {
+                return ResourceManager.GetString("RWWorkshopCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The RimWorld Workshop Directory specified appears to be incorrect.
+        /// </summary>
+        public static string RWWorkshopDirIncorrectError {
+            get {
+                return ResourceManager.GetString("RWWorkshopDirIncorrectError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search....
         /// </summary>
         public static string SearchGhostText {
             get {
                 return ResourceManager.GetString("SearchGhostText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string SettingsTitle {
+            get {
+                return ResourceManager.GetString("SettingsTitle", resourceCulture);
             }
         }
         

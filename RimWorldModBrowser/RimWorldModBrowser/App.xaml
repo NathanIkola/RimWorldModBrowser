@@ -136,7 +136,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type RepeatButton}">
-                        <Border x:Name="Border" Margin="1 0 1 1" CornerRadius="0" BorderThickness="0" Background="{StaticResource ButtonBackground}">
+                        <Border x:Name="Border" Margin="1 0 1 0" CornerRadius="0" BorderThickness="0" Background="{StaticResource ButtonBackground}">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualState x:Name="Normal" />
@@ -190,7 +190,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Thumb}">
-                        <Border CornerRadius="2" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" />
+                        <Border CornerRadius="0" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -266,10 +266,27 @@
         <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>
         </Style>
+
+        <!-- TextBox Styles -->
+        <Style TargetType="TextBox" BasedOn="{StaticResource Modern}">
+            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="Background" Value="{StaticResource ListBackground}"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
         
         <!-- Custom Styles -->
         <Style x:Key="TitleBar" TargetType="Grid" BasedOn="{StaticResource Modern}">
             <Setter Property="Background" Value="{StaticResource ButtonBackground}"/>
+        </Style>
+
+        <Style x:Key="ModernButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Control.Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="5" Opacity="0.15"/>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Application.Resources>
 </Application>

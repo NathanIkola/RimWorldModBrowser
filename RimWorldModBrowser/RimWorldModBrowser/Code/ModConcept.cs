@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace RimWorldModBrowser.Code
     /// <summary>
     /// Represents the core concept of a RimWorld mod
     /// </summary>
-    public class ModConcept
+    public class ModConcept : IComparable
     {
         #region Public properties
         /// <summary>
@@ -38,6 +39,11 @@ namespace RimWorldModBrowser.Code
         public string Path { get; set; }
 
         /// <summary>
+        /// The path to the mod's image
+        /// </summary>
+        public string ImagePath => Path + @"\About\Preview.png";
+
+        /// <summary>
         /// The list of paths to the DLLs for this mod
         /// </summary>
         public List<string> DllPaths { get; set; }
@@ -45,7 +51,7 @@ namespace RimWorldModBrowser.Code
         /// <summary>
         /// Returns whether or not this mod has DLLs available
         /// </summary>
-        public bool HasDlls => (DllPaths?.Count ?? 0) > 0;
+        public bool HasDlls => Settings.Lookup(Constants.DnSpyPath) is not null && (DllPaths?.Count ?? 0) > 0;
 
         /// <summary>
         /// The mod ID for the mod (if present)
@@ -85,7 +91,7 @@ namespace RimWorldModBrowser.Code
             }
             else
             {
-                steamIdPath = steamId.Replace(@"About\PublishedFileId.txt", "");
+                steamIdPath = steamIdPath.Replace(@"About\PublishedFileId.txt", "");
                 if (steamIdPath.Contains("294100"))
                     steamId = System.IO.Path.GetDirectoryName(steamIdPath + @"\").Split(@"\").Last();
             }
@@ -149,6 +155,13 @@ namespace RimWorldModBrowser.Code
         public override string ToString()
         {
             return Name;
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj is ModConcept mod)
+                return Name.CompareTo(mod.Name);
+            return 1;
         }
         #endregion
     }

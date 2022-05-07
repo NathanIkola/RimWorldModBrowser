@@ -72,10 +72,11 @@ namespace RimWorldModBrowser.Components
             {
                 FileName = dnSpyPath
             };
-            Process.Start(startInfo);
 
             foreach (string dll in Model.DllPaths)
                 startInfo.ArgumentList.Add(dll);
+
+            Process.Start(startInfo);
         }
 
         /// <summary>
@@ -94,6 +95,16 @@ namespace RimWorldModBrowser.Components
                 Verb = "open"
             };
             Process.Start(startInfo);
+        }
+
+        /// <summary>
+        /// The event raised when the user resizes the window
+        /// </summary>
+        /// <param name="sender">The control that spawned this event</param>
+        /// <param name="e">The arguments for this event</param>
+        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            preview_img.Height = (int)LayoutRoot.RowDefinitions[1].ActualHeight;
         }
     }
 }

@@ -7,14 +7,13 @@
         xmlns:local="clr-namespace:RimWorldModBrowser"
         Style="{StaticResource {x:Type Window}}"
         mc:Ignorable="d"
-        Loaded="OnLoad"
         Title="Mod Browser" Height="450" Width="800">
     <DockPanel>
         <StatusBar Padding="0" DockPanel.Dock="Bottom">
             <StatusBarItem Content="{Binding Path=Model.StatusString}" />
             <Separator Width="1" Background="{StaticResource ButtonBorder}"/>
             <StatusBarItem HorizontalAlignment="Right" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
-                <Button>
+                <Button Click="SettingsClick">
                     <Image Source="images/settings.png" Height="16"/>
                 </Button>
             </StatusBarItem>
@@ -26,7 +25,9 @@
             </Grid.ColumnDefinitions>
 
             <components:ModList Grid.Column="0" Mods="{Binding Path=Model.LoadedMods}" FilteredModCount="{Binding Path=Model.FilteredModCount}" CurrentlySelectedMod="{Binding Path=Model.SelectedMod}"/>
-            <components:SelectedMod Grid.Column="1" Model="{Binding Path=Model.SelectedMod}"/>
+            <Border Grid.Column="1" BorderBrush="{StaticResource ButtonBorder}" BorderThickness="0 0 0 1">
+                <components:SelectedMod Model="{Binding Path=Model.SelectedMod}"/>
+            </Border>
         </Grid>
     </DockPanel>
 </Window>

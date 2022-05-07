@@ -5,13 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:resx="clr-namespace:RimWorldModBrowser"
              xmlns:local="clr-namespace:RimWorldModBrowser.Components"
+             SizeChanged="OnSizeChanged"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="6*"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Style="{StaticResource TitleBar}">
@@ -35,9 +36,11 @@
                 <Image Source="pack://application:,,,/images/folder.png" Height="24"/>
             </Button>
         </Grid>
-        <Border Grid.Row="1" BorderBrush="{StaticResource ButtonBorder}" BorderThickness="0 0 0 1">
-            <Image Width="400" Height="225" Stretch="UniformToFill"/>
+
+        <Border Grid.Row="1" Background="{StaticResource ListBackground}" BorderBrush="{StaticResource ButtonBorder}" BorderThickness="1 0 0 1">
+            <Image x:Name="preview_img" Source="{Binding Path=Model.ImagePath}"/>
         </Border>
+
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>

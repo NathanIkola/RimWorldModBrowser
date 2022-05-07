@@ -57,24 +57,6 @@ namespace RimWorldModBrowser.Components
         }
 
         /// <summary>
-        /// The style applied to the ListBox
-        /// </summary>
-        public Style ListBoxStyle 
-        { 
-            get { return (Style)GetValue(ListBoxStyleProperty); }
-            set { SetValue(ListBoxStyleProperty, value); }
-        }
-
-        /// <summary>
-        /// The style applied to the search box
-        /// </summary>
-        public Style TextBoxStyle
-        {
-            get { return (Style)GetValue(TextBoxStyleProperty); }
-            set { SetValue(TextBoxStyleProperty, value); }
-        }
-
-        /// <summary>
         /// The ghost text to display in the text box
         /// </summary>
         public string GhostText
@@ -126,24 +108,6 @@ namespace RimWorldModBrowser.Components
             DependencyProperty.Register(nameof(Mods), typeof(ModCollection), typeof(ModList), new PropertyMetadata(OnModsPropertyChanged));
 
         /// <summary>
-        /// The property that makes ListBoxStyle bindable
-        /// </summary>
-        public static readonly DependencyProperty ListBoxStyleProperty =
-            DependencyProperty.Register(nameof(ListBoxStyle), typeof(Style), typeof(ModList), new FrameworkPropertyMetadata
-            {
-                BindsTwoWayByDefault = true,
-            });
-
-        /// <summary>
-        /// The property that makes ListBoxStyle bindable
-        /// </summary>
-        public static readonly DependencyProperty TextBoxStyleProperty =
-            DependencyProperty.Register(nameof(TextBoxStyle), typeof(Style), typeof(ModList), new FrameworkPropertyMetadata
-            {
-                BindsTwoWayByDefault = true,
-            });
-
-        /// <summary>
         /// The property that makes GhostText bindable
         /// </summary>
         public static readonly DependencyProperty GhostTextProperty =
@@ -193,6 +157,8 @@ namespace RimWorldModBrowser.Components
             FilteredModList = new(Mods);
             if (string.IsNullOrEmpty(GhostText))
                 GhostText = "Search...";
+            if (FilteredModList.Count > 0)
+                CurrentlySelectedMod = FilteredModList[0];
         }
 
         /// <summary>
@@ -203,6 +169,7 @@ namespace RimWorldModBrowser.Components
         /// <param name="e">The event arguments</param>
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            ModConcept selectedMod = CurrentlySelectedMod;
             FilteredModList = new(Mods);
             if (sender is WatermarkTextBox searchBox)
             {
@@ -217,10 +184,11 @@ namespace RimWorldModBrowser.Components
                 }
             }
             FilteredModCount = FilteredModList.Count;
-            if (!FilteredModList.Contains(CurrentlySelectedMod))
+            if (!FilteredModList.Contains(selectedMod))
             {
                 CurrentlySelectedMod = FilteredModCount > 0 ? FilteredModList[0] : null;
             }
+            else CurrentlySelectedMod = selectedMod;
         }
         #endregion
     }

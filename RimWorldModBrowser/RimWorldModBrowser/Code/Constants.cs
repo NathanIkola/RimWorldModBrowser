@@ -20,6 +20,11 @@
         /// The key used to store the path to DnSpy
         /// </summary>
         public static readonly string DnSpyPath = "DnSpyPath";
+
+        /// <summary>
+        /// The key used to store whether or not we're running for the first time
+        /// </summary>
+        public static readonly string FirstRunKey = "FirstRun";
         #endregion
     }
 }

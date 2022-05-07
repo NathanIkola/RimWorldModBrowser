@@ -121,13 +121,61 @@
     <value>By {0}</value>
     <comment>Used to show credit to the developer that made the mod</comment>
   </data>
+  <data name="BrowseButton" xml:space="preserve">
+    <value>Browse...</value>
+    <comment>The caption for a file browser's Browse button</comment>
+  </data>
+  <data name="CancelCaption" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>The caption for the Cancel button in the Settings window</comment>
+  </data>
+  <data name="dnSpyPath" xml:space="preserve">
+    <value>dnSpy Path:</value>
+    <comment>The caption for the dnSpy file search box</comment>
+  </data>
+  <data name="dnSpyPathBadError" xml:space="preserve">
+    <value>The dnSpy path specified does not exist</value>
+    <comment>The error message notifying the user that the path they specified is incorrect</comment>
+  </data>
+  <data name="DoneCaption" xml:space="preserve">
+    <value>Done</value>
+    <comment>The caption for the Done button in the Settings window</comment>
+  </data>
   <data name="ModDescription" xml:space="preserve">
     <value>Mod Description:</value>
     <comment>Used to denote the text field that shows the mod's description</comment>
   </data>
+  <data name="RWModsDirBadError" xml:space="preserve">
+    <value>The RimWorld Mods Directory specified does not exist</value>
+    <comment>The error message notifying the user that the path they specified does not exist</comment>
+  </data>
+  <data name="RWModsDirectoryCaption" xml:space="preserve">
+    <value>RimWorld Local Mods Directory (RimWorld\Mods):</value>
+    <comment>The caption for the RW Mods directory search box</comment>
+  </data>
+  <data name="RWModsDirIncorrectError" xml:space="preserve">
+    <value>The RimWorld Mods Directory specified appears to be incorrect</value>
+    <comment>The error message notifying the user that the path they specified is valid but does not conform to what the program expects it to be</comment>
+  </data>
+  <data name="RWWorkshopBadError" xml:space="preserve">
+    <value>The RimWorld Workshop Directory specified does not exist</value>
+    <comment>The error message notifying the user that the path they specified does not exist</comment>
+  </data>
+  <data name="RWWorkshopCaption" xml:space="preserve">
+    <value>RimWorld Workshop Directory (Game ID: 294100):</value>
+    <comment>The caption for the RW Workshop directory search box</comment>
+  </data>
+  <data name="RWWorkshopDirIncorrectError" xml:space="preserve">
+    <value>The RimWorld Workshop Directory specified appears to be incorrect</value>
+    <comment>The error message notifying the user that the path they specified is valid but does not conform to what the program expects it to be</comment>
+  </data>
   <data name="SearchGhostText" xml:space="preserve">
     <value>Search...</value>
     <comment>The string used to inform the user that typing in this text box searches the mod list</comment>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Settings</value>
+    <comment>The title for the Settings window</comment>
   </data>
   <data name="StatusBarLoadCount" xml:space="preserve">
     <value>Showing {0} out of {1} mods</value>

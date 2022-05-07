@@ -40,7 +40,7 @@ namespace RimWorldModBrowser.Code
         public static void Set(string key, string value)
         {
             Debug.Assert(!string.IsNullOrWhiteSpace(key));
-            Dependencies.Add(key, value);
+            Dependencies[key] = value;
         }
         #endregion
 

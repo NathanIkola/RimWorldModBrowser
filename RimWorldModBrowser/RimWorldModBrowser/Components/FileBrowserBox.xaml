@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="RimWorldModBrowser.Components.FileBrowserBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:resx="clr-namespace:RimWorldModBrowser"
+             xmlns:local="clr-namespace:RimWorldModBrowser.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="300">
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Label Grid.Row="0" Content="{Binding Path=Label}"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Grid.Column="0" Text="{Binding Path=Path}"/>
+            <Button Grid.Column="1" Margin="2.5 0 0 0" Style="{StaticResource ModernButton}" Click="BrowseClick">
+                <Label Content="{x:Static resx:Strings.BrowseButton}"/>
+            </Button>
+        </Grid>
+    </Grid>
+</UserControl>
