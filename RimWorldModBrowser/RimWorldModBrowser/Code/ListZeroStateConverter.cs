@@ -7,7 +7,7 @@ namespace RimWorldModBrowser.Code
 {
     public class ListZeroStateConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public virtual object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null) 
                 return Visibility.Collapsed;
@@ -21,7 +21,7 @@ namespace RimWorldModBrowser.Code
             return Visibility.Collapsed;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public virtual object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             // Don't need to implement this
             return null;

@@ -105,7 +105,7 @@ namespace RimWorldModBrowser.Components
         /// <param name="e">The arguments for this event</param>
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            preview_img.Height = (int)LayoutRoot.RowDefinitions[1].ActualHeight;
+            preview_img.Height = (int)LayoutRoot.RowDefinitions[2].ActualHeight;
         }
         #endregion
     }

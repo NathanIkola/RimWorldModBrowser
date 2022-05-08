@@ -8,8 +8,15 @@
              SizeChanged="OnSizeChanged"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid x:Name="LayoutRoot">
+    <UserControl.Resources>
+        <Style x:Key="DescriptionBar" BasedOn="{StaticResource TitleBar}" TargetType="Grid">
+            <Setter Property="Background" Value="{StaticResource WindowBackgroundBrush}"/>
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid x:Name="LayoutRoot" Background="{StaticResource WindowBackgroundBrush}">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="4*"/>
             <RowDefinition Height="6*"/>
@@ -37,27 +44,24 @@
             </Button>
         </Grid>
 
-        <local:ZeroState Grid.Row="1" Grid.RowSpan="2" Background="{StaticResource ListBackground}" Caption="{x:Static resx:Strings.SelectAMod}" ImagePath="pack://application:,,,/images/emu-big.png"/>
+        <local:ZeroState Grid.Row="1" Grid.RowSpan="3" Visibility="{Binding Path=Model, Converter={StaticResource ListZeroStateReverseConverter}}" Background="{StaticResource ListBackground}" Caption="{x:Static resx:Strings.SelectAMod}" ImagePath="pack://application:,,,/images/emu-big.png"/>
 
-        <Border Grid.Row="1" Visibility="{Binding Path=Model, Converter={StaticResource ListZeroStateConverter}}" Background="{StaticResource ListBackground}" BorderBrush="{StaticResource ButtonBorder}" BorderThickness="1 0 0 1">
+        <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontStyle="Italic" Content="{Binding Path=Model.AuthorString}"/>
+        <Border Grid.Row="2" Visibility="{Binding Path=Model, Converter={StaticResource ListZeroStateConverter}}" BorderBrush="{StaticResource ButtonBorder}" BorderThickness="0 0 0 0">
             <Image x:Name="preview_img" Source="{Binding Path=Model.ImagePath}"/>
         </Border>
 
-        <Grid Grid.Row="2" Background="{StaticResource WindowBackgroundBrush}" Visibility="{Binding Path=Model, Converter={StaticResource ListZeroStateConverter}}">
+        <Grid Grid.Row="3" Visibility="{Binding Path=Model, Converter={StaticResource ListZeroStateConverter}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <StackPanel Orientation="Vertical" Grid.Row="0" Style="{StaticResource Modern}">
-                <Label Grid.Row="0" VerticalAlignment="Center" FontStyle="Italic" Content="{Binding Path=Model.AuthorString}"/>
-                <Label Grid.Row="1" Content="{x:Static resx:Strings.ModDescription}"/>
-            </StackPanel>
-            <Border Grid.Row="1" BorderBrush="{StaticResource ButtonBorder}" BorderThickness="0 1 0 0">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <TextBlock Margin="6" TextWrapping="WrapWithOverflow" Text="{Binding Path=Model.Description}"/>
-                </ScrollViewer>
-            </Border>
+            <ScrollViewer Grid.Row="1" Background="{StaticResource ScrollBarBackground}" VerticalScrollBarVisibility="Auto">
+                <TextBlock Padding="5 3 5 5" Margin="6" TextWrapping="WrapWithOverflow" Text="{Binding Path=Model.Description}"/>
+            </ScrollViewer>
+
+            <Grid Grid.Row="0" Style="{StaticResource DescriptionBar}" MinHeight="8"/>
         </Grid>
     </Grid>
 </UserControl>

@@ -19,7 +19,7 @@
             <xctk:WatermarkTextBox Grid.Row="0" Height="32" x:Name="tb_searchBox" VerticalAlignment="Center" TextChanged="SearchBox_TextChanged" Watermark="{Binding Path=GhostText}" />
         </StackPanel>
 
-        <local:ZeroState Grid.Row="1" Background="{StaticResource ListBackground}" Caption="{x:Static resx:Strings.NoResults}" ImagePath="pack://application:,,,/images/questionmark-big.png"/>
+        <local:ZeroState Grid.Row="1" Visibility="{Binding Path=FilteredModCount, Converter={StaticResource ListZeroStateReverseConverter}}" Background="{StaticResource ListBackground}" Caption="{x:Static resx:Strings.NoResults}" ImagePath="pack://application:,,,/images/questionmark-big.png"/>
         <ListBox Grid.Row="1" Visibility="{Binding Path=FilteredModCount, Converter={StaticResource ListZeroStateConverter}}" ItemsSource="{Binding Path=FilteredModList}" SelectedItem="{Binding Path=CurrentlySelectedMod}"/>
     </Grid>
 </UserControl>

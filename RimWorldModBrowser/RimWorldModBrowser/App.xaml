@@ -7,6 +7,7 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <code:ListZeroStateConverter x:Key="ListZeroStateConverter"/>
+        <code:ListZeroStateReverseConverter x:Key="ListZeroStateReverseConverter"/>
 
         <!-- Colors -->
         <Color x:Key="WindowBackgroundColor">#444444</Color>
@@ -37,7 +38,7 @@
             <Setter Property="Control.BorderThickness" Value="0"/>
             <Setter Property="Control.Effect">
                 <Setter.Value>
-                    <DropShadowEffect BlurRadius="5" Opacity="0.15"/>
+                    <DropShadowEffect BlurRadius="5" Opacity="0.15" Direction="289"/>
                 </Setter.Value>
             </Setter>
         </Style>
@@ -106,6 +107,15 @@
         </Style>
     
         <!-- Textbox Styles -->
+        <Style TargetType="TextBox" BasedOn="{StaticResource Modern}">
+            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="Background" Value="{StaticResource ListBackground}"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="5 0 0 0"/>
+        </Style>
+        
         <DataTemplate x:Key="CustomWatermarkTemplate">
             <ContentControl Content="{Binding}" Focusable="False"/>
         </DataTemplate>
@@ -270,15 +280,6 @@
             <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>
         </Style>
 
-        <!-- TextBox Styles -->
-        <Style TargetType="TextBox" BasedOn="{StaticResource Modern}">
-            <Setter Property="Height" Value="Auto"/>
-            <Setter Property="Background" Value="{StaticResource ListBackground}"/>
-            <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-        </Style>
-        
         <!-- Custom Styles -->
         <Style x:Key="TitleBar" TargetType="Grid" BasedOn="{StaticResource Modern}">
             <Setter Property="Background" Value="{StaticResource ButtonBackground}"/>

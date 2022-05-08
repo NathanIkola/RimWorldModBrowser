@@ -9,12 +9,14 @@
         mc:Ignorable="d"
         Title="Mod Browser" Height="450" Width="800">
     <DockPanel>
-        <StatusBar Padding="0" DockPanel.Dock="Bottom">
+        <StatusBar Padding="0" DockPanel.Dock="Bottom" >
             <StatusBarItem Content="{Binding Path=Model.StatusString}" />
             <Separator Width="1" Background="{StaticResource ButtonBorder}"/>
-            <StatusBarItem HorizontalAlignment="Right" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+            <StatusBarItem HorizontalAlignment="Right" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Padding="0">
                 <Button Click="SettingsClick">
-                    <Image Source="images/settings.png" Height="16"/>
+                    <Grid Margin="4">
+                        <Image Source="images/settings.png" Height="16"/>
+                    </Grid>
                 </Button>
             </StatusBarItem>
         </StatusBar>
@@ -24,7 +26,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <components:ZeroState Grid.Column="0" Grid.ColumnSpan="2" Caption="{x:Static local:Strings.CheckSettings}" ImagePath="pack://application:,,,/images/beaver-big.png"/>
+            <components:ZeroState Grid.Column="0" Visibility="{Binding Path=Model.LoadedMods.Count, Converter={StaticResource ListZeroStateReverseConverter}}" Grid.ColumnSpan="2" Caption="{x:Static local:Strings.CheckSettings}" ImagePath="pack://application:,,,/images/beaver-big.png"/>
 
             <components:ModList Grid.Column="0" x:Name="modList" Visibility="{Binding Path=Model.LoadedMods.Count, Converter={StaticResource ListZeroStateConverter}}" Mods="{Binding Path=Model.LoadedMods}" FilteredModCount="{Binding Path=Model.FilteredModCount}" CurrentlySelectedMod="{Binding Path=Model.SelectedMod}"/>
             <Border Grid.Column="1" Visibility="{Binding Path=Model.LoadedMods.Count, Converter={StaticResource ListZeroStateConverter}}" BorderBrush="{StaticResource ButtonBorder}" BorderThickness="0 0 0 1">
