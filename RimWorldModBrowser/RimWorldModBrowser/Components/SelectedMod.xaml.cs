@@ -1,4 +1,5 @@
 ﻿using RimWorldModBrowser.Code;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,6 +36,7 @@ namespace RimWorldModBrowser.Components
             DependencyProperty.Register(nameof(Model), typeof(ModConcept), typeof(SelectedMod), new FrameworkPropertyMetadata
             {
                 BindsTwoWayByDefault = true,
+                PropertyChangedCallback = OnModelUpdated,
             });
         #endregion
 
@@ -106,6 +108,17 @@ namespace RimWorldModBrowser.Components
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
             preview_img.Height = (int)LayoutRoot.RowDefinitions[2].ActualHeight;
+        }
+
+        /// <summary>
+        /// The event raised when the Model is updated
+        /// </summary>
+        /// <param name="sender">The control that spawned this event</param>
+        /// <param name="e">The arguments for this event</param>
+        private static void OnModelUpdated(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is SelectedMod selectedMod)
+                selectedMod.OnSizeChanged(null, null);
         }
         #endregion
     }
