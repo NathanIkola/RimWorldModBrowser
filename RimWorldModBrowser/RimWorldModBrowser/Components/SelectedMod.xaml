@@ -48,7 +48,7 @@
 
         <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontStyle="Italic" Content="{Binding Path=Model.AuthorString}"/>
         <Border Grid.Row="2" Visibility="{Binding Path=Model, Converter={StaticResource ListZeroStateConverter}}" BorderBrush="{StaticResource ButtonBorder}" BorderThickness="0 0 0 0">
-            <Image x:Name="preview_img" Source="{Binding Path=Model.ImagePath}"/>
+            <Image x:Name="preview_img" Source="{Binding Path=Model.ImagePath, TargetNullValue={x:Null}}"/>
         </Border>
 
         <Grid Grid.Row="3" Visibility="{Binding Path=Model, Converter={StaticResource ListZeroStateConverter}}">
