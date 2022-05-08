@@ -41,7 +41,16 @@ namespace RimWorldModBrowser.Code
         /// <summary>
         /// The path to the mod's image
         /// </summary>
-        public string ImagePath => Path + @"\About\Preview.png";
+        public string ImagePath
+        {
+            get
+            {
+                string path = Path + @"\About\Preview.png";
+                if (File.Exists(path))
+                    return path;
+                return null;
+            }
+        }
 
         /// <summary>
         /// The list of paths to the DLLs for this mod
