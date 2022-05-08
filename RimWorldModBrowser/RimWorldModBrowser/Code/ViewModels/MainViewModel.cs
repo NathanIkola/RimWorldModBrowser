@@ -67,7 +67,7 @@ namespace RimWorldModBrowser.Code.ViewModels
         /// <returns>A singular or plural string from the resources file with the numbers injected as appropriate</returns>
         private static string GetStatusBarString(int filterCount, int totalCount)
         {
-            string baseStr = (totalCount > 1) 
+            string baseStr = (totalCount != 1) 
                 ? Strings.StatusBarLoadCount 
                 : Strings.StatusBarLoadCountSingular;
 

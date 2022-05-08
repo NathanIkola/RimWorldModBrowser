@@ -40,6 +40,7 @@ namespace RimWorldModBrowser
 
             // reload mods based on the settings
             ViewModel.LoadMods();
+            modList.Refresh();
         }
     }
 }

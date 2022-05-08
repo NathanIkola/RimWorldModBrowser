@@ -129,6 +129,10 @@
     <value>Cancel</value>
     <comment>The caption for the Cancel button in the Settings window</comment>
   </data>
+  <data name="CheckSettings" xml:space="preserve">
+    <value>No mods found, check your settings</value>
+    <comment>Message letting the user know that there were no mods loaded into the program</comment>
+  </data>
   <data name="dnSpyPath" xml:space="preserve">
     <value>dnSpy Path:</value>
     <comment>The caption for the dnSpy file search box</comment>
@@ -144,6 +148,10 @@
   <data name="ModDescription" xml:space="preserve">
     <value>Mod Description:</value>
     <comment>Used to denote the text field that shows the mod's description</comment>
+  </data>
+  <data name="NoResults" xml:space="preserve">
+    <value>No Results</value>
+    <comment>Informs the user that there were no results for that search</comment>
   </data>
   <data name="RWModsDirBadError" xml:space="preserve">
     <value>The RimWorld Mods Directory specified does not exist</value>
@@ -172,6 +180,10 @@
   <data name="SearchGhostText" xml:space="preserve">
     <value>Search...</value>
     <comment>The string used to inform the user that typing in this text box searches the mod list</comment>
+  </data>
+  <data name="SelectAMod" xml:space="preserve">
+    <value>Select a mod to get started</value>
+    <comment>Informs the user that they should select a mod to get started using the program</comment>
   </data>
   <data name="SettingsTitle" xml:space="preserve">
     <value>Settings</value>

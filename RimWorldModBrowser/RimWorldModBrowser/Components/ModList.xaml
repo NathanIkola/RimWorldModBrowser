@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:local="clr-namespace:RimWorldModBrowser.Components"
+             xmlns:resx="clr-namespace:RimWorldModBrowser"
              mc:Ignorable="d"
              Loaded="OnLoad"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -17,6 +18,8 @@
         <StackPanel Style="{StaticResource Modern}">
             <xctk:WatermarkTextBox Grid.Row="0" Height="32" x:Name="tb_searchBox" VerticalAlignment="Center" TextChanged="SearchBox_TextChanged" Watermark="{Binding Path=GhostText}" />
         </StackPanel>
-        <ListBox Grid.Row="1" ItemsSource="{Binding Path=FilteredModList}" SelectedItem="{Binding Path=CurrentlySelectedMod}"/>
+
+        <local:ZeroState Grid.Row="1" Background="{StaticResource ListBackground}" Caption="{x:Static resx:Strings.NoResults}" ImagePath="pack://application:,,,/images/questionmark-big.png"/>
+        <ListBox Grid.Row="1" Visibility="{Binding Path=FilteredModCount, Converter={StaticResource ListZeroStateConverter}}" ItemsSource="{Binding Path=FilteredModList}" SelectedItem="{Binding Path=CurrentlySelectedMod}"/>
     </Grid>
 </UserControl>

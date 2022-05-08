@@ -24,8 +24,10 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <components:ModList Grid.Column="0" Mods="{Binding Path=Model.LoadedMods}" FilteredModCount="{Binding Path=Model.FilteredModCount}" CurrentlySelectedMod="{Binding Path=Model.SelectedMod}"/>
-            <Border Grid.Column="1" BorderBrush="{StaticResource ButtonBorder}" BorderThickness="0 0 0 1">
+            <components:ZeroState Grid.Column="0" Grid.ColumnSpan="2" Caption="{x:Static local:Strings.CheckSettings}" ImagePath="pack://application:,,,/images/beaver-big.png"/>
+
+            <components:ModList Grid.Column="0" x:Name="modList" Visibility="{Binding Path=Model.LoadedMods.Count, Converter={StaticResource ListZeroStateConverter}}" Mods="{Binding Path=Model.LoadedMods}" FilteredModCount="{Binding Path=Model.FilteredModCount}" CurrentlySelectedMod="{Binding Path=Model.SelectedMod}"/>
+            <Border Grid.Column="1" Visibility="{Binding Path=Model.LoadedMods.Count, Converter={StaticResource ListZeroStateConverter}}" BorderBrush="{StaticResource ButtonBorder}" BorderThickness="0 0 0 1">
                 <components:SelectedMod Model="{Binding Path=Model.SelectedMod}"/>
             </Border>
         </Grid>

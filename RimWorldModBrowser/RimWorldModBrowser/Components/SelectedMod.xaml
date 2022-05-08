@@ -37,11 +37,13 @@
             </Button>
         </Grid>
 
-        <Border Grid.Row="1" Background="{StaticResource ListBackground}" BorderBrush="{StaticResource ButtonBorder}" BorderThickness="1 0 0 1">
+        <local:ZeroState Grid.Row="1" Grid.RowSpan="2" Background="{StaticResource ListBackground}" Caption="{x:Static resx:Strings.SelectAMod}" ImagePath="pack://application:,,,/images/emu-big.png"/>
+
+        <Border Grid.Row="1" Visibility="{Binding Path=Model, Converter={StaticResource ListZeroStateConverter}}" Background="{StaticResource ListBackground}" BorderBrush="{StaticResource ButtonBorder}" BorderThickness="1 0 0 1">
             <Image x:Name="preview_img" Source="{Binding Path=Model.ImagePath}"/>
         </Border>
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="2" Background="{StaticResource WindowBackgroundBrush}" Visibility="{Binding Path=Model, Converter={StaticResource ListZeroStateConverter}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>

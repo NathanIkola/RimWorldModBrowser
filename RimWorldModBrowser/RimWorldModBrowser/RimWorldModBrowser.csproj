@@ -4,13 +4,21 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>icob.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\beaver-big.png" />
     <None Remove="Images\dnspy.png" />
+    <None Remove="Images\emu-big.png" />
     <None Remove="Images\folder.png" />
+    <None Remove="Images\questionmark-big.png" />
     <None Remove="Images\settings.png" />
     <None Remove="Images\steam.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="icob.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,8 +28,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\beaver-big.png" />
     <Resource Include="Images\dnspy.png" />
+    <Resource Include="Images\emu-big.png" />
     <Resource Include="Images\folder.png" />
+    <Resource Include="Images\questionmark-big.png" />
     <Resource Include="Images\settings.png" />
     <Resource Include="Images\steam.png" />
   </ItemGroup>

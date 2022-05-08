@@ -75,6 +75,16 @@ namespace RimWorldModBrowser.Components
         }
         #endregion
 
+        #region Public methods
+        /// <summary>
+        /// Refresh the necessary properties based on the current state
+        /// </summary>
+        public void Refresh()
+        {
+            SearchBox_TextChanged(tb_searchBox, null);
+        }
+        #endregion
+
         #region Private fields
         /// <summary>
         /// The backing field for <see cref="FilteredModList"/>
@@ -184,11 +194,7 @@ namespace RimWorldModBrowser.Components
                 }
             }
             FilteredModCount = FilteredModList.Count;
-            if (!FilteredModList.Contains(selectedMod))
-            {
-                CurrentlySelectedMod = FilteredModCount > 0 ? FilteredModList[0] : null;
-            }
-            else CurrentlySelectedMod = selectedMod;
+            CurrentlySelectedMod = selectedMod;
         }
         #endregion
     }

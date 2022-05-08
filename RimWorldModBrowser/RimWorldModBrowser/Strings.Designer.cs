@@ -88,6 +88,15 @@ namespace RimWorldModBrowser {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No mods found, check your settings.
+        /// </summary>
+        public static string CheckSettings {
+            get {
+                return ResourceManager.GetString("CheckSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to dnSpy Path:.
         /// </summary>
         public static string dnSpyPath {
@@ -120,6 +129,15 @@ namespace RimWorldModBrowser {
         public static string ModDescription {
             get {
                 return ResourceManager.GetString("ModDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Results.
+        /// </summary>
+        public static string NoResults {
+            get {
+                return ResourceManager.GetString("NoResults", resourceCulture);
             }
         }
         
@@ -183,6 +201,15 @@ namespace RimWorldModBrowser {
         public static string SearchGhostText {
             get {
                 return ResourceManager.GetString("SearchGhostText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a mod to get started.
+        /// </summary>
+        public static string SelectAMod {
+            get {
+                return ResourceManager.GetString("SelectAMod", resourceCulture);
             }
         }
         

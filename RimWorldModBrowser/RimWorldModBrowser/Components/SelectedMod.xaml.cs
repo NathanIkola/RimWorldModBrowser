@@ -38,6 +38,7 @@ namespace RimWorldModBrowser.Components
             });
         #endregion
 
+        #region Event handlers
         /// <summary>
         /// The event raised when the user attempts to open the Steam Workshop link for this mod
         /// </summary>
@@ -106,5 +107,6 @@ namespace RimWorldModBrowser.Components
         {
             preview_img.Height = (int)LayoutRoot.RowDefinitions[1].ActualHeight;
         }
+        #endregion
     }
 }

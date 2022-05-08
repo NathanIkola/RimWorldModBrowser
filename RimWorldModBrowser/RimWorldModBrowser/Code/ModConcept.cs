@@ -51,7 +51,7 @@ namespace RimWorldModBrowser.Code
         /// <summary>
         /// Returns whether or not this mod has DLLs available
         /// </summary>
-        public bool HasDlls => Settings.Lookup(Constants.DnSpyPath) is not null && (DllPaths?.Count ?? 0) > 0;
+        public bool HasDlls => !string.IsNullOrWhiteSpace(Settings.Lookup(Constants.DnSpyPath)) && (DllPaths?.Count ?? 0) > 0;
 
         /// <summary>
         /// The mod ID for the mod (if present)
