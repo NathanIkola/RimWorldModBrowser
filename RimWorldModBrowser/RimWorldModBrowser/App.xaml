@@ -18,19 +18,19 @@
         <Color x:Key="BackgroundColor">#3D3D3D</Color>
 
         <!-- Brushes -->
-        <SolidColorBrush x:Key="ButtonForeground" Color="{StaticResource ForegroundColor}"/>
-        <SolidColorBrush x:Key="ButtonBackground" Color="{StaticResource LightBackgroundColor}"/>
-        <SolidColorBrush x:Key="PressedButtonBackground" Color="{StaticResource DisabledBackgroundColor}"/>
+        <SolidColorBrush x:Key="ButtonForeground" Color="{DynamicResource ForegroundColor}"/>
+        <SolidColorBrush x:Key="ButtonBackground" Color="{DynamicResource LightBackgroundColor}"/>
+        <SolidColorBrush x:Key="PressedButtonBackground" Color="{DynamicResource DisabledBackgroundColor}"/>
         <SolidColorBrush x:Key="MouseOverButtonForeground" Color="#1B1B1B"/>
         <SolidColorBrush x:Key="MouseOverButtonBackground" Color="#AAAAAA"/>
-        <SolidColorBrush x:Key="DisabledButtonForeground" Color="{StaticResource DisabledBackgroundColor}"/>
-        <SolidColorBrush x:Key="DisabledButtonBackground" Color="{StaticResource LightDisabledBackgroundColor}"/>
-        <SolidColorBrush x:Key="ForegroundBrush" Color="{StaticResource ForegroundColor}"/>
-        <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{StaticResource WindowBackgroundColor}"/>
-        <SolidColorBrush x:Key="ButtonBorder" Color="{StaticResource DarkBackgroundColor}"/>
-        <SolidColorBrush x:Key="ListBackground" Color="{StaticResource DarkBackgroundColor}"/>
-        <SolidColorBrush x:Key="ScrollBarBackground" Color="{StaticResource BackgroundColor}"/>
-        <SolidColorBrush x:Key="ScrollViewerBackground" Color="{StaticResource DarkBackgroundColor}" />
+        <SolidColorBrush x:Key="DisabledButtonForeground" Color="{DynamicResource DisabledBackgroundColor}"/>
+        <SolidColorBrush x:Key="DisabledButtonBackground" Color="{DynamicResource LightDisabledBackgroundColor}"/>
+        <SolidColorBrush x:Key="ForegroundBrush" Color="{DynamicResource ForegroundColor}"/>
+        <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{DynamicResource WindowBackgroundColor}"/>
+        <SolidColorBrush x:Key="ButtonBorder" Color="{DynamicResource DarkBackgroundColor}"/>
+        <SolidColorBrush x:Key="ListBackground" Color="{DynamicResource DarkBackgroundColor}"/>
+        <SolidColorBrush x:Key="ScrollBarBackground" Color="{DynamicResource BackgroundColor}"/>
+        <SolidColorBrush x:Key="ScrollViewerBackground" Color="{DynamicResource DarkBackgroundColor}" />
         
         <!-- Base Styles -->
         <Style x:Key="Modern">
