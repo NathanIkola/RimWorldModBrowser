@@ -46,8 +46,9 @@ namespace RimWorldModBrowser.Components
         /// <param name="e">The arguments for this event</param>
         public void SteamClick(object sender, RoutedEventArgs e)
         {
-            if (Model is null) return;
+            if (Model is null | !Model.HasSteamId) return;
             e.Handled = true;
+
             string url = @"https://steamcommunity.com/sharedfiles/filedetails/?id=" + Model.SteamId;
 
             ProcessStartInfo startInfo = new()
