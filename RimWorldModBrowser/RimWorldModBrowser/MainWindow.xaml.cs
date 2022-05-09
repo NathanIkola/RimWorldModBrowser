@@ -1,5 +1,6 @@
 ﻿using RimWorldModBrowser.Code;
 using RimWorldModBrowser.Code.ViewModels;
+using System;
 using System.Windows;
 using System.Windows.Input;
 using SettingsView = RimWorldModBrowser.Views.Settings;
@@ -16,13 +17,8 @@ namespace RimWorldModBrowser
             InitializeComponent();
             DataContext = ViewModel;
 
-            Settings.Load();
-            if (int.TryParse(Settings.Lookup(Constants.LastWindowWidth), out int width))
-                Width = width;
-            if (int.TryParse(Settings.Lookup(Constants.LastWindowHeight), out int height))
-                Height = height;
-            if (bool.TryParse(Settings.Lookup(Constants.IsMaximized), out bool maximized))
-                WindowState = maximized ? WindowState.Maximized : WindowState.Normal;
+            Settings.Load(); 
+            SetWindowOnStartup();
 
             // if this is the first run, load the settings dialog
             if (Settings.Lookup(Constants.FirstRunKey) is null)
@@ -32,6 +28,21 @@ namespace RimWorldModBrowser
             }
 
             ViewModel.LoadMods();
+        }
+
+        private void SetWindowOnStartup()
+        {
+            if (int.TryParse(Settings.Lookup(Constants.LastWindowWidth), out int width))
+                Width = width;
+            if (int.TryParse(Settings.Lookup(Constants.LastWindowHeight), out int height))
+                Height = height;
+            if (bool.TryParse(Settings.Lookup(Constants.IsMaximized), out bool maximized))
+                WindowState = maximized ? WindowState.Maximized : WindowState.Normal;
+
+            if (int.TryParse(Settings.Lookup(Constants.WindowTop), out int top))
+                Top = top;
+            if (int.TryParse(Settings.Lookup(Constants.WindowLeft), out int left))
+                Left = left;
         }
 
         /// <summary>
@@ -92,6 +103,12 @@ namespace RimWorldModBrowser
         private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Settings.Save();
+        }
+
+        private void OnLocationChanged(object sender, System.EventArgs e)
+        {
+            Settings.Set(Constants.WindowTop, Top.ToString());
+            Settings.Set(Constants.WindowLeft, Left.ToString());
         }
     }
 }

@@ -9,6 +9,7 @@
         Style="{StaticResource {x:Type Window}}"
         SizeChanged="OnSizeChanged"
         Closing="OnClosing"
+        LocationChanged="OnLocationChanged"
         mc:Ignorable="d"
         Title="Mod Browser" MinHeight="450" MinWidth="600">
 

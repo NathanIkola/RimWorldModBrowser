@@ -43,6 +43,18 @@
         /// restored on the next launch
         /// </summary>
         public static readonly string IsMaximized = "IsMaximized";
+
+        /// <summary>
+        /// The key used to store the last window top value so it can be
+        /// restored on the next launch
+        /// </summary>
+        public static readonly string WindowTop = "WindowTop";
+
+        /// <summary>
+        /// The key used to store the last window left value so it can be
+        /// restored on the next launch
+        /// </summary>
+        public static readonly string WindowLeft = "WindowLeft";
         #endregion
     }
 }
