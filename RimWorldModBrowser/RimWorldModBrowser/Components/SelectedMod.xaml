@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:resx="clr-namespace:RimWorldModBrowser"
              xmlns:local="clr-namespace:RimWorldModBrowser.Components"
-             SizeChanged="OnSizeChanged"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -48,7 +47,7 @@
 
         <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontStyle="Italic" Content="{Binding Path=Model.AuthorString}"/>
         <Border Grid.Row="2" Visibility="{Binding Path=Model, Converter={StaticResource ListZeroStateConverter}}" BorderBrush="{StaticResource ButtonBorder}" BorderThickness="0 0 0 0">
-            <Image x:Name="preview_img" Source="{Binding Path=Model.ImagePath, TargetNullValue={x:Null}, FallbackValue={x:Null}, Converter={StaticResource StringToPngConverter}}"/>
+            <Image Height="Auto" Source="{Binding Path=Model.ImagePath, TargetNullValue={x:Null}, FallbackValue={x:Null}, Converter={StaticResource StringToPngConverter}}"/>
         </Border>
 
         <Grid Grid.Row="3" Visibility="{Binding Path=Model, Converter={StaticResource ListZeroStateConverter}}">

@@ -106,13 +106,13 @@ namespace RimWorldModBrowser.Components
         /// <param name="e">The arguments for this event</param>
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            preview_img.Height = (int)LayoutRoot.RowDefinitions[2].ActualHeight;
+            //preview_img.Height = (int)LayoutRoot.RowDefinitions[2].ActualHeight;
         }
 
         /// <summary>
         /// The event raised when the Model is updated
         /// </summary>
-        /// <param name="sender">The control that spawned this event</param>
+        /// <param name="d">The model</param>
         /// <param name="e">The arguments for this event</param>
         private static void OnModelUpdated(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
