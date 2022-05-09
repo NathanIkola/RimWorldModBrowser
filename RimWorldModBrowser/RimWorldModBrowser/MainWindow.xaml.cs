@@ -1,6 +1,5 @@
 ﻿using RimWorldModBrowser.Code;
 using RimWorldModBrowser.Code.ViewModels;
-using System;
 using System.Windows;
 using System.Windows.Input;
 using SettingsView = RimWorldModBrowser.Views.Settings;
@@ -17,7 +16,7 @@ namespace RimWorldModBrowser
             InitializeComponent();
             DataContext = ViewModel;
 
-            Settings.Load(); 
+            Settings.Load(Constants.SettingsFile); 
             SetWindowOnStartup();
 
             // if this is the first run, load the settings dialog
@@ -110,7 +109,7 @@ namespace RimWorldModBrowser
 
         private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            Settings.Save();
+            Settings.Save(Constants.SettingsFile);
         }
 
         private void OnLocationChanged(object sender, System.EventArgs e)

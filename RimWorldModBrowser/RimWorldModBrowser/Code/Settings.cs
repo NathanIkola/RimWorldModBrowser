@@ -54,6 +54,8 @@ namespace RimWorldModBrowser.Code
             filename = GetValidXMLFile(filename);
             Debug.Assert(filename is not null);
 
+            Directory.CreateDirectory(Path.GetDirectoryName(filename));
+
             using FileStream stream = new(filename, FileMode.Create);
             XmlSerializer serializer = new(typeof(SettingsEntry[]));
             serializer.Serialize(stream, GetSettingsEntries());
@@ -68,10 +70,10 @@ namespace RimWorldModBrowser.Code
             filename = GetValidXMLFile(filename);
             Debug.Assert(filename is not null);
 
-            using FileStream stream = new(filename, FileMode.OpenOrCreate);
             XmlSerializer serializer = new(typeof(SettingsEntry[]));
             try
             {
+                using FileStream stream = new(filename, FileMode.Open);
                 SettingsEntry[] entries = serializer.Deserialize(stream) as SettingsEntry[];
                 PutSettingsEntries(entries);
             }
@@ -89,7 +91,7 @@ namespace RimWorldModBrowser.Code
         /// <remarks>Appends .xml if <paramref name="filename"/> doesn't already have it</remarks>
         private static string GetValidXMLFile(string filename)
         {
-            if (string.IsNullOrWhiteSpace(filename) || filename.IndexOfAny(Path.GetInvalidFileNameChars()) > -1)
+            if (string.IsNullOrWhiteSpace(filename) || filename.IndexOfAny(Path.GetInvalidPathChars()) > -1)
                 return null;
 
             filename = filename.Trim();

@@ -1,4 +1,6 @@
-﻿namespace RimWorldModBrowser.Code
+﻿using System;
+
+namespace RimWorldModBrowser.Code
 {
     /// <summary>
     /// A class that contains all of the constants for this application
@@ -55,6 +57,11 @@
         /// restored on the next launch
         /// </summary>
         public static readonly string WindowLeft = "WindowLeft";
+
+        /// <summary>
+        /// The path to the settings file
+        /// </summary>
+        public static string SettingsFile => Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\RWModBrowser\settings.xml";
         #endregion
     }
 }

@@ -33,7 +33,7 @@ namespace RimWorldModBrowser.Code.ViewModels
             Settings.Set(Constants.WorkshopDirKey, Model.WorkshopDir);
             Settings.Set(Constants.DnSpyPath, Model.DnSpyPath);
             Settings.Set(Constants.FirstRunKey, "false");
-            Settings.Save();
+            Settings.Save(Constants.SettingsFile);
         }
 
         /// <summary>
