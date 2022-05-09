@@ -10,7 +10,6 @@ namespace RimWorldModBrowser.Code.ViewModels
 
         public SettingsViewModel()
         {
-            Settings.Load();
             LoadModel();
         }
 
