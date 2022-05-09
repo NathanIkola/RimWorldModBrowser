@@ -1,6 +1,7 @@
 ﻿using RimWorldModBrowser.Code;
 using RimWorldModBrowser.Code.ViewModels;
 using System.Windows;
+using System.Windows.Input;
 using SettingsView = RimWorldModBrowser.Views.Settings;
 
 namespace RimWorldModBrowser
@@ -34,12 +35,38 @@ namespace RimWorldModBrowser
 
         private void SettingsClick(object sender, RoutedEventArgs e)
         {
+            e.Handled = true;
             SettingsView sv = new();
             sv.ShowDialog();
 
             // reload mods based on the settings
             ViewModel.LoadMods();
             modList.Refresh();
+        }
+
+        private void OnFocusSearchBar(object sender, ExecutedRoutedEventArgs e)
+        {
+            modList.OnFocusSearchBar(sender, e);
+        }
+
+        private void OnOpenSteam(object sender, ExecutedRoutedEventArgs e)
+        {
+            selectedMod.SteamClick(sender, e);
+        }
+
+        private void OnOpenDnSpy(object sender, ExecutedRoutedEventArgs e)
+        {
+            selectedMod.DnSpyClick(sender, e);
+        }
+
+        private void OnOpenExplorer(object sender, ExecutedRoutedEventArgs e)
+        {
+            selectedMod.FolderClick(sender, e);
+        }
+
+        private void OnOpenSettings(object sender, ExecutedRoutedEventArgs e)
+        {
+            SettingsClick(sender, e);
         }
     }
 }

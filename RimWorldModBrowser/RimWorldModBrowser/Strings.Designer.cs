@@ -124,20 +124,38 @@ namespace RimWorldModBrowser {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mod Description:.
-        /// </summary>
-        public static string ModDescription {
-            get {
-                return ResourceManager.GetString("ModDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to No Results.
         /// </summary>
         public static string NoResults {
             get {
                 return ResourceManager.GetString("NoResults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open dnSpy with this mod&apos;s assemblies (Ctrl + D).
+        /// </summary>
+        public static string OpenDnSpyTooltip {
+            get {
+                return ResourceManager.GetString("OpenDnSpyTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open this mod&apos;s folder (Ctrl + E).
+        /// </summary>
+        public static string OpenExplorerTooltip {
+            get {
+                return ResourceManager.GetString("OpenExplorerTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open the Steam Workshop page for this mod (Ctrl + S).
+        /// </summary>
+        public static string OpenSteamTooltip {
+            get {
+                return ResourceManager.GetString("OpenSteamTooltip", resourceCulture);
             }
         }
         
@@ -205,6 +223,15 @@ namespace RimWorldModBrowser {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search for mods by name or author (Ctrl + F).
+        /// </summary>
+        public static string SearchTooltip {
+            get {
+                return ResourceManager.GetString("SearchTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select a mod to get started.
         /// </summary>
         public static string SelectAMod {
@@ -219,6 +246,15 @@ namespace RimWorldModBrowser {
         public static string SettingsTitle {
             get {
                 return ResourceManager.GetString("SettingsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open the Settings window (Ctrl + G).
+        /// </summary>
+        public static string SettingsTooltip {
+            get {
+                return ResourceManager.GetString("SettingsTooltip", resourceCulture);
             }
         }
         

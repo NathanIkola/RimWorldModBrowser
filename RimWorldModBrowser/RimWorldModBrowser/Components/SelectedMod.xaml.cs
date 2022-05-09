@@ -35,7 +35,6 @@ namespace RimWorldModBrowser.Components
             DependencyProperty.Register(nameof(Model), typeof(ModConcept), typeof(SelectedMod), new FrameworkPropertyMetadata
             {
                 BindsTwoWayByDefault = true,
-                PropertyChangedCallback = OnModelUpdated,
             });
         #endregion
 
@@ -45,9 +44,10 @@ namespace RimWorldModBrowser.Components
         /// </summary>
         /// <param name="sender">The control that spawned this event</param>
         /// <param name="e">The arguments for this event</param>
-        private void SteamClick(object sender, RoutedEventArgs e)
+        public void SteamClick(object sender, RoutedEventArgs e)
         {
             if (Model is null) return;
+            e.Handled = true;
             string url = @"https://steamcommunity.com/sharedfiles/filedetails/?id=" + Model.SteamId;
 
             ProcessStartInfo startInfo = new()
@@ -64,9 +64,11 @@ namespace RimWorldModBrowser.Components
         /// </summary>
         /// <param name="sender">The control that spawned this event</param>
         /// <param name="e">The arguments for this event</param>
-        private void DnSpyClick(object sender, RoutedEventArgs e)
+        public void DnSpyClick(object sender, RoutedEventArgs e)
         {
-            if (Model is null) return;
+            if (Model is null || !Model.HasDlls) return;
+            e.Handled = true;
+
             string dnSpyPath = Settings.Lookup(Constants.DnSpyPath);
             if (string.IsNullOrWhiteSpace(dnSpyPath)) return;
 
@@ -86,9 +88,10 @@ namespace RimWorldModBrowser.Components
         /// </summary>
         /// <param name="sender">The control that spawned this event</param>
         /// <param name="e">The arguments for this event</param>
-        private void FolderClick(object sender, RoutedEventArgs e)
+        public void FolderClick(object sender, RoutedEventArgs e)
         {
             if (Model is null) return;
+            e.Handled = true;
 
             ProcessStartInfo startInfo = new()
             {
@@ -97,27 +100,6 @@ namespace RimWorldModBrowser.Components
                 Verb = "open"
             };
             Process.Start(startInfo);
-        }
-
-        /// <summary>
-        /// The event raised when the user resizes the window
-        /// </summary>
-        /// <param name="sender">The control that spawned this event</param>
-        /// <param name="e">The arguments for this event</param>
-        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            //preview_img.Height = (int)LayoutRoot.RowDefinitions[2].ActualHeight;
-        }
-
-        /// <summary>
-        /// The event raised when the Model is updated
-        /// </summary>
-        /// <param name="d">The model</param>
-        /// <param name="e">The arguments for this event</param>
-        private static void OnModelUpdated(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is SelectedMod selectedMod)
-                selectedMod.OnSizeChanged(null, null);
         }
         #endregion
     }

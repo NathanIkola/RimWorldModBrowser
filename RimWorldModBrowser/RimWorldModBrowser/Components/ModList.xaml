@@ -9,6 +9,7 @@
              mc:Ignorable="d"
              Loaded="OnLoad"
              d:DesignHeight="450" d:DesignWidth="800">
+
     <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -16,7 +17,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Style="{StaticResource Modern}">
-            <xctk:WatermarkTextBox Grid.Row="0" Height="32" x:Name="tb_searchBox" VerticalAlignment="Center" TextChanged="SearchBox_TextChanged" Watermark="{Binding Path=GhostText}" />
+            <xctk:WatermarkTextBox Grid.Row="0" ToolTip="{x:Static resx:Strings.SearchTooltip}" Height="32" x:Name="tb_searchBox" VerticalAlignment="Center" TextChanged="SearchBox_TextChanged" Watermark="{Binding Path=GhostText}" />
         </StackPanel>
 
         <local:ZeroState Grid.Row="1" Visibility="{Binding Path=FilteredModCount, Converter={StaticResource ListZeroStateReverseConverter}}" Background="{StaticResource ListBackground}" Caption="{x:Static resx:Strings.NoResults}" ImagePath="pack://application:,,,/images/questionmark-big.png"/>

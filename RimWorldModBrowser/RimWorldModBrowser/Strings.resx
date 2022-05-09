@@ -145,13 +145,21 @@
     <value>Done</value>
     <comment>The caption for the Done button in the Settings window</comment>
   </data>
-  <data name="ModDescription" xml:space="preserve">
-    <value>Mod Description:</value>
-    <comment>Used to denote the text field that shows the mod's description</comment>
-  </data>
   <data name="NoResults" xml:space="preserve">
     <value>No Results</value>
     <comment>Informs the user that there were no results for that search</comment>
+  </data>
+  <data name="OpenDnSpyTooltip" xml:space="preserve">
+    <value>Open dnSpy with this mod's assemblies (Ctrl + D)</value>
+    <comment>The tooltip shown when hovering over the dnSpy button, informing the user that pressing the button will open dnSpy with the selected mod's assemblies (DLL files)</comment>
+  </data>
+  <data name="OpenExplorerTooltip" xml:space="preserve">
+    <value>Open this mod's folder (Ctrl + E)</value>
+    <comment>The tooltip shown when hovering over the Folder button, informing the user that pressing the button will open the mod's folder on their computer</comment>
+  </data>
+  <data name="OpenSteamTooltip" xml:space="preserve">
+    <value>Open the Steam Workshop page for this mod (Ctrl + S)</value>
+    <comment>The tooltip shown when hovering over the Steam button, informing the user that pressing the button will open the Steam Workshop for the currently selected mod</comment>
   </data>
   <data name="RWModsDirBadError" xml:space="preserve">
     <value>The RimWorld Mods Directory specified does not exist</value>
@@ -181,6 +189,10 @@
     <value>Search...</value>
     <comment>The string used to inform the user that typing in this text box searches the mod list</comment>
   </data>
+  <data name="SearchTooltip" xml:space="preserve">
+    <value>Search for mods by name or author (Ctrl + F)</value>
+    <comment>The tooltip shown when hovering over the search bar, informing the user that they can search for mods by name or author</comment>
+  </data>
   <data name="SelectAMod" xml:space="preserve">
     <value>Select a mod to get started</value>
     <comment>Informs the user that they should select a mod to get started using the program</comment>
@@ -188,6 +200,10 @@
   <data name="SettingsTitle" xml:space="preserve">
     <value>Settings</value>
     <comment>The title for the Settings window</comment>
+  </data>
+  <data name="SettingsTooltip" xml:space="preserve">
+    <value>Open the Settings window (Ctrl + G)</value>
+    <comment>The tooltip shown when hovering over the Settings button, informing the user that pressing the button will open the Settings dialog</comment>
   </data>
   <data name="StatusBarLoadCount" xml:space="preserve">
     <value>Showing {0} out of {1} mods</value>

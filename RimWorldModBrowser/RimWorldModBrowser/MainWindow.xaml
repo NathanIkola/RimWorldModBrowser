@@ -3,23 +3,34 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:code="clr-namespace:RimWorldModBrowser.Code"
         xmlns:components="clr-namespace:RimWorldModBrowser.Components"
         xmlns:local="clr-namespace:RimWorldModBrowser"
         Style="{StaticResource {x:Type Window}}"
         mc:Ignorable="d"
         Title="Mod Browser" Height="450" Width="800">
+
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static code:CustomCommands.FocusSearchBar}" Executed="OnFocusSearchBar"/>
+        <CommandBinding Command="{x:Static code:CustomCommands.OpenSteam}" Executed="OnOpenSteam"/>
+        <CommandBinding Command="{x:Static code:CustomCommands.OpenDnSpy}" Executed="OnOpenDnSpy"/>
+        <CommandBinding Command="{x:Static code:CustomCommands.OpenExplorer}" Executed="OnOpenExplorer"/>
+        <CommandBinding Command="{x:Static code:CustomCommands.OpenSettings}" Executed="OnOpenSettings"/>
+    </Window.CommandBindings>
+    
     <DockPanel>
         <StatusBar Padding="0" DockPanel.Dock="Bottom" >
             <StatusBarItem Content="{Binding Path=Model.StatusString}" />
             <Separator Width="1" Background="{StaticResource ButtonBorder}"/>
             <StatusBarItem HorizontalAlignment="Right" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Padding="0">
-                <Button Click="SettingsClick">
+                <Button Click="SettingsClick" ToolTip="{x:Static local:Strings.SettingsTooltip}">
                     <Grid Margin="4">
                         <Image Source="images/settings.png" Height="16"/>
                     </Grid>
                 </Button>
             </StatusBarItem>
         </StatusBar>
+        
         <Grid DockPanel.Dock="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MinWidth="300"/>
@@ -30,7 +41,7 @@
 
             <components:ModList Grid.Column="0" x:Name="modList" Visibility="{Binding Path=Model.LoadedMods.Count, Converter={StaticResource ListZeroStateConverter}}" Mods="{Binding Path=Model.LoadedMods}" FilteredModCount="{Binding Path=Model.FilteredModCount}" CurrentlySelectedMod="{Binding Path=Model.SelectedMod}"/>
             <Border Grid.Column="1" Visibility="{Binding Path=Model.LoadedMods.Count, Converter={StaticResource ListZeroStateConverter}}" BorderBrush="{StaticResource ButtonBorder}" BorderThickness="0 0 0 1">
-                <components:SelectedMod Model="{Binding Path=Model.SelectedMod}"/>
+                <components:SelectedMod x:Name="selectedMod" Model="{Binding Path=Model.SelectedMod}"/>
             </Border>
         </Grid>
     </DockPanel>

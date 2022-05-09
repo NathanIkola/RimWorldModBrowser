@@ -83,6 +83,17 @@ namespace RimWorldModBrowser.Components
         {
             SearchBox_TextChanged(tb_searchBox, null);
         }
+
+        /// <summary>
+        /// Focuses the text bar
+        /// </summary>
+        /// <param name="sender">The control that raised the event</param>
+        /// <param name="e">The arguments for this event</param>
+        public void OnFocusSearchBar(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        {
+            e.Handled = true;
+            tb_searchBox.Focus();
+        }
         #endregion
 
         #region Private fields

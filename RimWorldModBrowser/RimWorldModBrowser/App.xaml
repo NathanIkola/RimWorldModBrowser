@@ -4,6 +4,7 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:converters="clr-namespace:RimWorldModBrowser.Code.Converters"
              xmlns:local="clr-namespace:RimWorldModBrowser"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <converters:ListZeroStateConverter x:Key="ListZeroStateConverter"/>
@@ -95,6 +96,11 @@
                     </Setter>
                 </Trigger>
             </Style.Triggers>
+        </Style>
+        
+        <!-- Tooltip Styles -->
+        <Style TargetType="ToolTip">
+            <Setter Property="Background" Value="{StaticResource ButtonBackground}"/>
         </Style>
         
         <!-- Label Styles -->
