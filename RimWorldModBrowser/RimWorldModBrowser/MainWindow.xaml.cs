@@ -22,10 +22,7 @@ namespace RimWorldModBrowser
 
             // if this is the first run, load the settings dialog
             if (Settings.Lookup(Constants.FirstRunKey) is null)
-            {
-                SettingsView sv = new();
-                sv.ShowDialog();
-            }
+                ShowSettings();
 
             ViewModel.LoadMods();
         }
@@ -53,12 +50,23 @@ namespace RimWorldModBrowser
         private void SettingsClick(object sender, RoutedEventArgs e)
         {
             e.Handled = true;
-            SettingsView sv = new();
-            sv.ShowDialog();
+            ShowSettings();
 
             // reload mods based on the settings
             ViewModel.LoadMods();
             modList.Refresh();
+        }
+
+        private void ShowSettings()
+        {
+            SettingsView sv = new();
+            sv.Show();
+
+            sv.Top = Top + (ActualHeight - sv.ActualHeight) / 2;
+            sv.Left = Left + (ActualWidth - sv.ActualWidth) / 2;
+            sv.Hide();
+
+            sv.ShowDialog();
         }
 
         private void OnFocusSearchBar(object sender, ExecutedRoutedEventArgs e)
