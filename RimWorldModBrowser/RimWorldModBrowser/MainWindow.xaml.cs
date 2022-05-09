@@ -1,7 +1,6 @@
 ﻿using RimWorldModBrowser.Code;
 using RimWorldModBrowser.Code.ViewModels;
 using System.Windows;
-using System.Windows.Controls;
 using SettingsView = RimWorldModBrowser.Views.Settings;
 
 namespace RimWorldModBrowser

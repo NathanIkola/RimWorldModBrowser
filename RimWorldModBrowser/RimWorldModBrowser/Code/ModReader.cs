@@ -24,7 +24,11 @@ namespace RimWorldModBrowser.Code
             {
                 string xmlPath = subdirectory + @"\About\About.xml";
                 if (File.Exists(xmlPath))
-                    mods.Add(ModConcept.ParseFromXML(xmlPath));
+                {
+                    ModConcept mod = ModConcept.ParseFromXML(xmlPath);
+                    if (mod is not null)
+                        mods.Add(mod);
+                }
                 else if (DirectoryIsEmpty(subdirectory))
                     Directory.Delete(subdirectory, false);
             }

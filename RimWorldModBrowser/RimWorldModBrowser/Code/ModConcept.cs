@@ -84,43 +84,66 @@ namespace RimWorldModBrowser.Code
         {
             Debug.Assert(!string.IsNullOrWhiteSpace(xmlPath));
             Debug.Assert(File.Exists(xmlPath));
+            Debug.Assert(xmlPath.EndsWith(@"\About\About.xml"));
 
             XmlDocument aboutXml = new();
-            aboutXml.Load(xmlPath);
+            try { aboutXml.Load(xmlPath); }
+            catch (XmlException) { return null; }
 
-            // attempt to get the Steam ID
-            string steamIdPath = xmlPath.Replace("About.xml", "PublishedFileId.txt");
-            string steamId = null;
-            if (File.Exists(steamIdPath))
-            {
-                string[] steamIds = File.ReadAllLines(steamIdPath);
-                foreach (string id in steamIds)
-                    if (!string.IsNullOrEmpty(id))
-                        steamId = id;
-            }
-            else
-            {
-                steamIdPath = steamIdPath.Replace(@"About\PublishedFileId.txt", "");
-                if (steamIdPath.Contains("294100"))
-                    steamId = System.IO.Path.GetDirectoryName(steamIdPath + @"\").Split(@"\").Last();
-            }
-
+            string name = GetElementByTagName(aboutXml, "name");
+            string author = GetElementByTagName(aboutXml, "author");
+            string description = GetElementByTagName(aboutXml, "description");
             string modPath = xmlPath.Replace(@"\About\About.xml", "");
+            string steamId = TryFindSteamId(xmlPath);
 
-            ModConcept concept = new()
+            return new()
             {
-                Name = GetElementByTagName(aboutXml, "name"),
-                Author = GetElementByTagName(aboutXml, "author"),
-                Description = GetElementByTagName(aboutXml, "description"),
-                Path = xmlPath.Replace(@"About\About.xml", ""),
+                Name = name,
+                Author = author,
+                Description = TrimDescription(description),
+                Path = modPath,
                 SteamId = steamId,
                 DllPaths = GetDlls(modPath)
             };
+        }
 
-            while (concept.Description is not null && (concept.Description.StartsWith("\n") || concept.Description.StartsWith("\r")))
-                concept.Description = concept.Description.TrimStart('\r').TrimStart('\n');
+        /// <summary>
+        /// Trims leading newlines from <paramref name="description"/>
+        /// </summary>
+        /// <param name="description">The description to trim</param>
+        /// <returns><paramref name="description"/> with no leading newlines</returns>
+        public static string TrimDescription(string description)
+        {
+            while (description is not null && (description.StartsWith("\n") || description.StartsWith("\r")))
+                description = description.TrimStart('\r').TrimStart('\n');
+            return description;
+        }
 
-            return concept;
+        /// <summary>
+        /// Try to get the Steam ID of this mod by checking the PublishedFileId.txt file
+        /// or if that isn't present, tries to get the ID from the folder path -- this
+        /// only works for workshop mods
+        /// </summary>
+        /// <param name="xmlPath">The path passed into <see cref="ParseFromXML"/></param>
+        /// <returns>The steam ID if found, or <see langword="null"/> if not</returns>
+        private static string TryFindSteamId(string xmlPath)
+        {
+            string steamIdPath = xmlPath.Replace("About.xml", "PublishedFileId.txt");
+            if (File.Exists(steamIdPath))
+            {
+                string[] steamIds = Array.Empty<string>();
+                try { steamIds = File.ReadAllLines(steamIdPath); }
+                catch (Exception) { }
+
+                if (steamIds?.Length > 0)
+                    return steamIds[0];
+            }
+
+            steamIdPath = steamIdPath.Replace(@"About\PublishedFileId.txt", "");
+            if (steamIdPath.Contains("294100"))
+                return System.IO.Path.GetDirectoryName(steamIdPath + @"\").Split(@"\").Last();
+
+            return null;
         }
 
         /// <summary>
@@ -130,6 +153,8 @@ namespace RimWorldModBrowser.Code
         /// <returns>A list of DLL paths</returns>
         private static List<string> GetDlls(string modPath)
         {
+            Debug.Assert(Directory.Exists(modPath));
+
             List<string> dlls = new();
             foreach(string file in Directory.GetFiles(modPath,"*.dll"))
                 dlls.Add(file);
