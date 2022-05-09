@@ -17,6 +17,12 @@ namespace RimWorldModBrowser
             DataContext = ViewModel;
 
             Settings.Load();
+            if (int.TryParse(Settings.Lookup(Constants.LastWindowWidth), out int width))
+                Width = width;
+            if (int.TryParse(Settings.Lookup(Constants.LastWindowHeight), out int height))
+                Height = height;
+            if (bool.TryParse(Settings.Lookup(Constants.IsMaximized), out bool maximized))
+                WindowState = maximized ? WindowState.Maximized : WindowState.Normal;
 
             // if this is the first run, load the settings dialog
             if (Settings.Lookup(Constants.FirstRunKey) is null)
@@ -67,6 +73,25 @@ namespace RimWorldModBrowser
         private void OnOpenSettings(object sender, ExecutedRoutedEventArgs e)
         {
             SettingsClick(sender, e);
+        }
+
+        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            // ignore maximize events
+            if (WindowState == WindowState.Maximized)
+            {
+                Settings.Set(Constants.IsMaximized, "true");
+                return;
+            }
+
+            Settings.Set(Constants.IsMaximized, "false");
+            Settings.Set(Constants.LastWindowWidth, ActualWidth.ToString());
+            Settings.Set(Constants.LastWindowHeight, ActualHeight.ToString());
+        }
+
+        private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Settings.Save();
         }
     }
 }

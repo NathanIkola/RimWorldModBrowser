@@ -7,8 +7,10 @@
         xmlns:components="clr-namespace:RimWorldModBrowser.Components"
         xmlns:local="clr-namespace:RimWorldModBrowser"
         Style="{StaticResource {x:Type Window}}"
+        SizeChanged="OnSizeChanged"
+        Closing="OnClosing"
         mc:Ignorable="d"
-        Title="Mod Browser" Height="450" Width="800">
+        Title="Mod Browser" MinHeight="450" MinWidth="600">
 
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static code:CustomCommands.FocusSearchBar}" Executed="OnFocusSearchBar"/>

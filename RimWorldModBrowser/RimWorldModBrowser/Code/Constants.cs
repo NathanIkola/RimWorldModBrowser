@@ -25,6 +25,24 @@
         /// The key used to store whether or not we're running for the first time
         /// </summary>
         public static readonly string FirstRunKey = "FirstRun";
+
+        /// <summary>
+        /// The key used to store the last width the user set the window to
+        /// so it can be restored on the next launch
+        /// </summary>
+        public static readonly string LastWindowWidth = "LastWindowWidth";
+
+        /// <summary>
+        /// The key used to store the last height the user set the window to
+        /// so it can be restored on the next launch
+        /// </summary>
+        public static readonly string LastWindowHeight = "LastWindowHeight";
+
+        /// <summary>
+        /// The key used to store the last maximized state so it can be
+        /// restored on the next launch
+        /// </summary>
+        public static readonly string IsMaximized = "IsMaximized";
         #endregion
     }
 }
