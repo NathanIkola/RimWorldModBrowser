@@ -52,12 +52,15 @@
         
         <!-- Button Styles -->
         <Style TargetType="Button">
+            <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Grid Background="{StaticResource ButtonBackground}">
-                            <ContentPresenter TextBlock.Foreground="{StaticResource ButtonForeground}" TextBlock.TextAlignment="Center" VerticalAlignment="Center"/>
-                        </Grid>
+                        <Border BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource FindAncestor, Button, 1}}" BorderThickness="{Binding BorderThickness, RelativeSource={RelativeSource FindAncestor, Button, 1}}">
+                            <Grid Background="{StaticResource ButtonBackground}">
+                                <ContentPresenter TextBlock.Foreground="{StaticResource ButtonForeground}" TextBlock.TextAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -66,9 +69,11 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="Button">
-                                <Grid Background="{StaticResource MouseOverButtonBackground}">
-                                    <ContentPresenter TextBlock.Foreground="{StaticResource MouseOverButtonForeground}" TextBlock.TextAlignment="Center" VerticalAlignment="Center"/>
-                                </Grid>
+                                <Border BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource FindAncestor, Button, 1}}" BorderThickness="{Binding BorderThickness, RelativeSource={RelativeSource FindAncestor, Button, 1}}">
+                                    <Grid Background="{StaticResource MouseOverButtonBackground}">
+                                        <ContentPresenter TextBlock.Foreground="{StaticResource MouseOverButtonForeground}" TextBlock.TextAlignment="Center" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Border>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
@@ -77,9 +82,11 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="Button">
-                                <Grid Background="{StaticResource DisabledButtonBackground}">
-                                    <ContentPresenter TextBlock.Foreground="{StaticResource DisabledButtonForeground}" TextBlock.TextAlignment="Center" VerticalAlignment="Center"/>
-                                </Grid>
+                                <Border BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource FindAncestor, Button, 1}}" BorderThickness="{Binding BorderThickness, RelativeSource={RelativeSource FindAncestor, Button, 1}}">
+                                    <Grid Background="{StaticResource DisabledButtonBackground}">
+                                        <ContentPresenter TextBlock.Foreground="{StaticResource DisabledButtonForeground}" TextBlock.TextAlignment="Center" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Border>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
@@ -88,9 +95,11 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="Button">
-                                <Grid Background="{StaticResource PressedButtonBackground}">
-                                    <ContentPresenter TextBlock.Foreground="{StaticResource ButtonForeground}" TextBlock.TextAlignment="Center" VerticalAlignment="Center"/>
-                                </Grid>
+                                <Border BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource FindAncestor, Button, 1}}" BorderThickness="{Binding BorderThickness, RelativeSource={RelativeSource FindAncestor, Button, 1}}">
+                                    <Grid Background="{StaticResource PressedButtonBackground}">
+                                        <ContentPresenter TextBlock.Foreground="{StaticResource ButtonForeground}" TextBlock.TextAlignment="Center" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Border>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
@@ -298,6 +307,7 @@
                     <DropShadowEffect BlurRadius="5" Opacity="0.15"/>
                 </Setter.Value>
             </Setter>
+            <Setter Property="BorderThickness" Value="0"/>
         </Style>
     </Application.Resources>
 </Application>
