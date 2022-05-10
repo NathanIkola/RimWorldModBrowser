@@ -11,6 +11,7 @@
         Closing="OnClosing"
         LocationChanged="OnLocationChanged"
         mc:Ignorable="d"
+        TextOptions.TextFormattingMode="Display"
         Title="Mod Browser" MinHeight="450" MinWidth="600">
 
     <Window.CommandBindings>

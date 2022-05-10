@@ -10,9 +10,9 @@
         mc:Ignorable="d"
         WindowStyle="ToolWindow"
         Style="{StaticResource {x:Type Window}}"
-        SnapsToDevicePixels="True"
         Closing="OnClosing"
-        Title="Settings" MinHeight="310" MaxHeight="310" MinWidth="490" Width="490">
+        TextOptions.TextFormattingMode="Display"
+        Title="Settings" MinHeight="315" MaxHeight="315" MinWidth="490" Width="490">
     <Window.Resources>
         <!-- Set the icon image here -->
         <BitmapImage x:Key="icon" UriSource="pack://application:,,,/images/settings.png"/>
@@ -79,13 +79,13 @@
         <Border Grid.Row="2" Background="{StaticResource ScrollBarBackground}" BorderBrush="{StaticResource ButtonBorder}" BorderThickness="0 1 0 0">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="2" Content="{x:Static resx:Strings.DoneCaption}" Click="DoneClick" Style="{StaticResource LButton}"/>
-                <Button Grid.Column="3" Content="{x:Static resx:Strings.CancelCaption}" Click="CancelClick" Style="{StaticResource RButton}"/>
+                <Button Grid.Column="2" Width="100" Content="{x:Static resx:Strings.DoneCaption}" Click="DoneClick" Style="{StaticResource LButton}"/>
+                <Button Grid.Column="3" Width="100" Content="{x:Static resx:Strings.CancelCaption}" Click="CancelClick" Style="{StaticResource RButton}"/>
             </Grid>
         </Border>
     </Grid>
