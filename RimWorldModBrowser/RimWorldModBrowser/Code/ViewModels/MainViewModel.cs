@@ -1,6 +1,8 @@
 ﻿using RimWorldModBrowser.Code.Models;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Windows;
+using System.Windows.Threading;
 
 namespace RimWorldModBrowser.Code.ViewModels
 {
@@ -25,7 +27,7 @@ namespace RimWorldModBrowser.Code.ViewModels
         /// <summary>
         /// Load all of the mods from the RimWorld install and Steam Workshop directories
         /// </summary>
-        public void LoadMods()
+        public void LoadMods(Window window)
         {
             List<ModConcept> mods = new();
             string rwInstallDir = Settings.Lookup(Constants.RWInstallDirKey);
@@ -39,7 +41,7 @@ namespace RimWorldModBrowser.Code.ViewModels
 
             mods.Sort();
 
-            Model.LoadedMods = new(mods);
+            window.Dispatcher.Invoke(() => Model.LoadedMods = new(mods));
         }
         #endregion
 

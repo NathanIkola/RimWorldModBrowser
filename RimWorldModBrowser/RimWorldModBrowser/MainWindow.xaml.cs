@@ -1,5 +1,6 @@
 ﻿using RimWorldModBrowser.Code;
 using RimWorldModBrowser.Code.ViewModels;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using SettingsView = RimWorldModBrowser.Views.Settings;
@@ -14,7 +15,7 @@ namespace RimWorldModBrowser
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = ViewModel;
+            DataContext = ViewModel.Model;
 
             Settings.Load(Constants.SettingsFile); 
             SetWindowOnStartup();
@@ -23,7 +24,7 @@ namespace RimWorldModBrowser
             if (Settings.Lookup(Constants.FirstRunKey) is null)
                 ShowSettings();
 
-            ViewModel.LoadMods();
+            ViewModel.LoadMods(this);
         }
 
         private void SetWindowOnStartup()
@@ -52,8 +53,7 @@ namespace RimWorldModBrowser
             ShowSettings();
 
             // reload mods based on the settings
-            ViewModel.LoadMods();
-            modList.Refresh();
+            Task.Run(() => ViewModel.LoadMods(this));
         }
 
         private void ShowSettings()

@@ -1,4 +1,5 @@
 ﻿using RimWorldModBrowser.Code;
+using RimWorldModBrowser.Code.Models;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,11 +21,6 @@ namespace RimWorldModBrowser.Components
 
         #region Public properties
         /// <summary>
-        /// The total number of mods in the list
-        /// </summary>
-        public int TotalModCount => Mods.Count;
-
-        /// <summary>
         /// The list of mods to actually display in the list after filtering
         /// </summary>
         public ModCollection FilteredModList
@@ -33,27 +29,18 @@ namespace RimWorldModBrowser.Components
             set 
             { 
                 _filteredModList = value;
-                FilteredModCount = value?.Count ?? 0;
+                Model.FilteredModCount = value?.Count ?? 0;
                 NotifyPropertyChanged(nameof(FilteredModList)); 
             }
         }
 
         /// <summary>
-        /// The number of mods filtered by the search box
+        /// The model for this component
         /// </summary>
-        public int FilteredModCount
+        public MainModel Model
         {
-            get { return (int)GetValue(FilteredModCountProperty); }
-            set { SetValue(FilteredModCountProperty, value); }
-        }
-
-        /// <summary>
-        /// The list of mods to put in the search box
-        /// </summary>
-        public ModCollection Mods
-        {
-            get { return (ModCollection)GetValue(ModsProperty); }
-            set { SetValue(ModsProperty, value); }
+            get { return (MainModel)GetValue(ModelProperty); }
+            set { SetValue(ModelProperty, value); }
         }
 
         /// <summary>
@@ -64,26 +51,9 @@ namespace RimWorldModBrowser.Components
             get { return (string)GetValue(GhostTextProperty); }
             set { SetValue(GhostTextProperty, value); }
         }
-
-        /// <summary>
-        /// The mod that's currently selected in the list
-        /// </summary>
-        public ModConcept CurrentlySelectedMod
-        {
-            get { return (ModConcept)GetValue(CurrentlySelectedModProperty); }
-            set { SetValue(CurrentlySelectedModProperty, value); }
-        }
         #endregion
 
         #region Public methods
-        /// <summary>
-        /// Refresh the necessary properties based on the current state
-        /// </summary>
-        public void Refresh()
-        {
-            SearchBox_TextChanged(tb_searchBox, null);
-        }
-
         /// <summary>
         /// Focuses the text bar
         /// </summary>
@@ -123,10 +93,13 @@ namespace RimWorldModBrowser.Components
 
         #region Dependency properties
         /// <summary>
-        /// The property that makes Mods bindable
+        /// The property that makes Model bindable
         /// </summary>
-        public static readonly DependencyProperty ModsProperty =
-            DependencyProperty.Register(nameof(Mods), typeof(ModCollection), typeof(ModList), new PropertyMetadata(OnModsPropertyChanged));
+        public static readonly DependencyProperty ModelProperty =
+            DependencyProperty.Register(nameof(Model), typeof(MainModel), typeof(ModList), new FrameworkPropertyMetadata
+            {
+                BindsTwoWayByDefault = true,
+            });
 
         /// <summary>
         /// The property that makes GhostText bindable
@@ -136,35 +109,17 @@ namespace RimWorldModBrowser.Components
             {
                 BindsTwoWayByDefault = true,
             });
-
-        /// <summary>
-        /// The property that makes FilteredModCount bindable
-        /// </summary>
-        public static readonly DependencyProperty FilteredModCountProperty =
-            DependencyProperty.Register(nameof(FilteredModCount), typeof(int), typeof(ModList), new FrameworkPropertyMetadata
-            {
-                BindsTwoWayByDefault = true,
-            });
-
-        /// <summary>
-        /// The property that makes CurrentlySelectedMod bindable
-        /// </summary>
-        public static readonly DependencyProperty CurrentlySelectedModProperty =
-            DependencyProperty.Register(nameof(CurrentlySelectedMod), typeof(ModConcept), typeof(ModList), new FrameworkPropertyMetadata
-            {
-                BindsTwoWayByDefault= true,
-            });
         #endregion
 
         #region Dependency property callbacks
         /// <summary>
         /// The callback fired when the Mods property gets updated
         /// </summary>
-        private static readonly PropertyChangedCallback OnModsPropertyChanged = delegate (DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private void OnModsPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (d is ModList modList)
-                modList.FilteredModList = new((ModCollection)e.NewValue);
-        };
+            if (e.PropertyName == nameof(MainModel.LoadedMods))
+                SearchBox_TextChanged(null, null);
+        }
         #endregion
 
         #region Event handlers
@@ -175,11 +130,12 @@ namespace RimWorldModBrowser.Components
         /// <param name="e">The arguments for this event</param>
         private void OnLoad(object sender, RoutedEventArgs e)
         {
-            FilteredModList = new(Mods);
+            Model.PropertyChanged += OnModsPropertyChanged;
+            FilteredModList = new(Model.LoadedMods);
             if (string.IsNullOrEmpty(GhostText))
                 GhostText = "Search...";
             if (FilteredModList.Count > 0)
-                CurrentlySelectedMod = FilteredModList[0];
+                Model.SelectedMod = FilteredModList[0];
         }
 
         /// <summary>
@@ -190,8 +146,8 @@ namespace RimWorldModBrowser.Components
         /// <param name="e">The event arguments</param>
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ModConcept selectedMod = CurrentlySelectedMod;
-            FilteredModList = new(Mods);
+            ModConcept selectedMod = Model.SelectedMod;
+            FilteredModList = new(Model.LoadedMods);
             if (sender is WatermarkTextBox searchBox)
             {
                 if (!string.IsNullOrWhiteSpace(searchBox.Text))
@@ -199,13 +155,13 @@ namespace RimWorldModBrowser.Components
                     string searchTerm = searchBox.Text.ToLower();
                     FilteredModList = new();
 
-                    foreach (ModConcept mod in Mods)
+                    foreach (ModConcept mod in Model.LoadedMods)
                         if (mod.Name.ToLower().Contains(searchTerm) || mod.Author.ToLower().Contains(searchTerm))
                             FilteredModList.Add(mod);
                 }
             }
-            FilteredModCount = FilteredModList.Count;
-            CurrentlySelectedMod = selectedMod;
+            Model.FilteredModCount = FilteredModList.Count;
+            Model.SelectedMod = selectedMod;
         }
         #endregion
     }

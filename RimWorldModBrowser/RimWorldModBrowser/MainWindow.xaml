@@ -23,7 +23,7 @@
     
     <DockPanel>
         <StatusBar Padding="0" DockPanel.Dock="Bottom" >
-            <StatusBarItem Content="{Binding Path=Model.StatusString}" />
+            <StatusBarItem Content="{Binding Path=StatusString}" />
             <Separator Width="1" Background="{StaticResource ButtonBorder}"/>
             <StatusBarItem HorizontalAlignment="Right" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Padding="0">
                 <Button Click="SettingsClick" ToolTip="{x:Static local:Strings.SettingsTooltip}">
@@ -40,11 +40,11 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <components:ZeroState Grid.Column="0" Visibility="{Binding Path=Model.LoadedMods.Count, Converter={StaticResource ListZeroStateReverseConverter}}" Grid.ColumnSpan="2" Caption="{x:Static local:Strings.CheckSettings}" ImagePath="pack://application:,,,/images/beaver-big.png"/>
+            <components:ZeroState Grid.Column="0" Visibility="{Binding Path=LoadedMods.Count, Converter={StaticResource ListZeroStateReverseConverter}}" Grid.ColumnSpan="2" Caption="{x:Static local:Strings.CheckSettings}" ImagePath="pack://application:,,,/images/beaver-big.png"/>
 
-            <components:ModList Grid.Column="0" x:Name="modList" Visibility="{Binding Path=Model.LoadedMods.Count, Converter={StaticResource ListZeroStateConverter}}" Mods="{Binding Path=Model.LoadedMods}" FilteredModCount="{Binding Path=Model.FilteredModCount}" CurrentlySelectedMod="{Binding Path=Model.SelectedMod}"/>
-            <Border Grid.Column="1" Visibility="{Binding Path=Model.LoadedMods.Count, Converter={StaticResource ListZeroStateConverter}}" BorderBrush="{StaticResource ButtonBorder}" BorderThickness="0 0 0 1">
-                <components:SelectedMod x:Name="selectedMod" Model="{Binding Path=Model.SelectedMod}"/>
+            <components:ModList Grid.Column="0" x:Name="modList" Visibility="{Binding Path=LoadedMods.Count, Converter={StaticResource ListZeroStateConverter}}" Model="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}"/>
+            <Border Grid.Column="1" Visibility="{Binding Path=LoadedMods.Count, Converter={StaticResource ListZeroStateConverter}}" BorderBrush="{StaticResource ButtonBorder}" BorderThickness="0 0 0 1">
+                <components:SelectedMod x:Name="selectedMod" Model="{Binding Path=SelectedMod}"/>
             </Border>
         </Grid>
     </DockPanel>
