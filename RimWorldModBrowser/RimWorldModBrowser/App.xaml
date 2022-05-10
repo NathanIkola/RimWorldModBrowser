@@ -148,6 +148,11 @@
         <Style TargetType="StatusBar">
             <Setter Property="Background" Value="{StaticResource ButtonBackground}"/>
             <Setter Property="Foreground" Value="{StaticResource ButtonForeground}"/>
+            <Setter Property="Control.Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="5" Opacity="0.07" Direction="90"/>
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <!-- ListBox Styles -->
@@ -297,8 +302,13 @@
         </Style>
 
         <!-- Custom Styles -->
-        <Style x:Key="TitleBar" TargetType="Grid" BasedOn="{StaticResource Modern}">
+        <Style x:Key="TitleBar" TargetType="Grid">
             <Setter Property="Background" Value="{StaticResource ButtonBackground}"/>
+            <Setter Property="Control.Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="5" Opacity="0.15" Direction="288"/>
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <Style x:Key="ModernButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">

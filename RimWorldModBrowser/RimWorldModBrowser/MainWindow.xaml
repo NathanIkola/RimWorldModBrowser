@@ -21,21 +21,14 @@
         <CommandBinding Command="{x:Static code:CustomCommands.OpenExplorer}" Executed="OnOpenExplorer"/>
         <CommandBinding Command="{x:Static code:CustomCommands.OpenSettings}" Executed="OnOpenSettings"/>
     </Window.CommandBindings>
-    
-    <DockPanel>
-        <StatusBar Padding="0" DockPanel.Dock="Bottom" >
-            <StatusBarItem Content="{Binding Path=StatusString}" />
-            <Separator Width="1" Background="{StaticResource ButtonBorder}"/>
-            <StatusBarItem HorizontalAlignment="Right" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Padding="0">
-                <Button Click="SettingsClick" ToolTip="{x:Static local:Strings.SettingsTooltip}">
-                    <Grid Margin="4">
-                        <Image Source="images/settings.png" Height="16"/>
-                    </Grid>
-                </Button>
-            </StatusBarItem>
-        </StatusBar>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         
-        <Grid DockPanel.Dock="Top">
+        <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MinWidth="300"/>
                 <ColumnDefinition Width="*"/>
@@ -48,5 +41,17 @@
                 <components:SelectedMod x:Name="selectedMod" Model="{Binding Path=SelectedMod}"/>
             </Border>
         </Grid>
-    </DockPanel>
+
+        <StatusBar Grid.Row="1">
+            <StatusBarItem Content="{Binding Path=StatusString}" />
+            <Separator Width="1" Background="{StaticResource ButtonBorder}"/>
+            <StatusBarItem HorizontalAlignment="Right" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Padding="0">
+                <Button Click="SettingsClick" ToolTip="{x:Static local:Strings.SettingsTooltip}">
+                    <Grid Margin="4">
+                        <Image Source="images/settings.png" Height="16"/>
+                    </Grid>
+                </Button>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
 </Window>

@@ -16,11 +16,11 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <StackPanel Style="{StaticResource Modern}">
-            <xctk:WatermarkTextBox Grid.Row="0" ToolTip="{x:Static resx:Strings.SearchTooltip}" Height="32" x:Name="tb_searchBox" VerticalAlignment="Center" TextChanged="SearchBox_TextChanged" Watermark="{Binding Path=GhostText}" />
-        </StackPanel>
-
         <local:ZeroState Grid.Row="1" Visibility="{Binding Path=Model.FilteredModCount, Converter={StaticResource ListZeroStateReverseConverter}}" Background="{StaticResource ListBackground}" Caption="{x:Static resx:Strings.NoResults}" ImagePath="pack://application:,,,/images/questionmark-big.png"/>
         <ListBox Grid.Row="1" Visibility="{Binding Path=Model.FilteredModCount, Converter={StaticResource ListZeroStateConverter}}" ItemsSource="{Binding Path=FilteredModList}" SelectedItem="{Binding Path=Model.SelectedMod}"/>
+
+        <StackPanel Grid.Row="0" Style="{StaticResource Modern}">
+            <xctk:WatermarkTextBox ToolTip="{x:Static resx:Strings.SearchTooltip}" Height="32" x:Name="tb_searchBox" VerticalAlignment="Center" TextChanged="SearchBox_TextChanged" Watermark="{Binding Path=GhostText}" />
+        </StackPanel>
     </Grid>
 </UserControl>
