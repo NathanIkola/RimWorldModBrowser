@@ -116,6 +116,11 @@ namespace RimWorldModBrowser.Code
         {
             while (description is not null && (description.StartsWith("\n") || description.StartsWith("\r")))
                 description = description.TrimStart('\r').TrimStart('\n');
+
+            // also replace any explicit \n strings with a real \n
+            if (description is not null)
+                description = description.Replace("\\n", "\n");
+            
             return description;
         }
 

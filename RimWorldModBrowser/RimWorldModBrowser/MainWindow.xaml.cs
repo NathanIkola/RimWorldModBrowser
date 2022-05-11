@@ -1,5 +1,7 @@
 ﻿using RimWorldModBrowser.Code;
 using RimWorldModBrowser.Code.ViewModels;
+using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -27,6 +29,17 @@ namespace RimWorldModBrowser
             ViewModel.LoadMods(this);
         }
 
+        #region Private properties
+        /// <summary>
+        /// The view model for this window
+        /// </summary>
+        private MainViewModel ViewModel { get; } = new();
+        #endregion
+
+        #region Private methods
+        /// <summary>
+        /// Attempts to load the window location and size from the settings
+        /// </summary>
         private void SetWindowOnStartup()
         {
             if (int.TryParse(Settings.Lookup(Constants.LastWindowWidth), out int width))
@@ -43,19 +56,8 @@ namespace RimWorldModBrowser
         }
 
         /// <summary>
-        /// The view model for this window
+        /// Actually bring up the Settings window in the center of the application
         /// </summary>
-        private readonly MainViewModel ViewModel = new();
-
-        private void SettingsClick(object sender, RoutedEventArgs e)
-        {
-            e.Handled = true;
-            ShowSettings();
-
-            // reload mods based on the settings
-            Task.Run(() => ViewModel.LoadMods(this));
-        }
-
         private void ShowSettings()
         {
             SettingsView sv = new();
@@ -67,32 +69,15 @@ namespace RimWorldModBrowser
 
             sv.ShowDialog();
         }
+        #endregion
 
-        private void OnFocusSearchBar(object sender, ExecutedRoutedEventArgs e)
-        {
-            modList.OnFocusSearchBar(sender, e);
-        }
-
-        private void OnOpenSteam(object sender, ExecutedRoutedEventArgs e)
-        {
-            selectedMod.SteamClick(sender, e);
-        }
-
-        private void OnOpenDnSpy(object sender, ExecutedRoutedEventArgs e)
-        {
-            selectedMod.DnSpyClick(sender, e);
-        }
-
-        private void OnOpenExplorer(object sender, ExecutedRoutedEventArgs e)
-        {
-            selectedMod.FolderClick(sender, e);
-        }
-
-        private void OnOpenSettings(object sender, ExecutedRoutedEventArgs e)
-        {
-            SettingsClick(sender, e);
-        }
-
+        #region Window events
+        /// <summary>
+        /// Callback for capturing window resize events so that the app can
+        /// be restored upon next startup
+        /// </summary>
+        /// <param name="sender">The control that raised the event</param>
+        /// <param name="e">The arguments for this event</param>
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
             // ignore maximize events
@@ -107,15 +92,95 @@ namespace RimWorldModBrowser
             Settings.Set(Constants.LastWindowHeight, ActualHeight.ToString());
         }
 
-        private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        /// <summary>
+        /// Callback that saves the current state of the Settings object to disk
+        /// </summary>
+        /// <param name="sender">The control that raised the event</param>
+        /// <param name="e">The arguments for this event</param>
+        private void OnClosing(object sender, CancelEventArgs e)
         {
             Settings.Save(Constants.SettingsFile);
         }
 
-        private void OnLocationChanged(object sender, System.EventArgs e)
+        /// <summary>
+        /// Callback for capturing window movements so that the app can start
+        /// in the same place on the next startup
+        /// </summary>
+        /// <param name="sender">The control that raised the event</param>
+        /// <param name="e">The arguments for this event</param>
+        private void OnLocationChanged(object sender, EventArgs e)
         {
             Settings.Set(Constants.WindowTop, Top.ToString());
             Settings.Set(Constants.WindowLeft, Left.ToString());
         }
+        #endregion
+
+        #region Command handlers
+        /// <summary>
+        /// Command function for focusing the search bar via shortcut key
+        /// </summary>
+        /// <param name="sender">The control that raised the event</param>
+        /// <param name="e">The arguments for this event</param>
+        private void OnFocusSearchBar(object sender, ExecutedRoutedEventArgs e)
+        {
+            modList.OnFocusSearchBar(sender, e);
+        }
+
+        /// <summary>
+        /// Command function for opening the Steam Workshop page via shortcut key
+        /// </summary>
+        /// <param name="sender">The control that raised the event</param>
+        /// <param name="e">The arguments for this event</param>
+        private void OnOpenSteam(object sender, ExecutedRoutedEventArgs e)
+        {
+            selectedMod.SteamClick(sender, e);
+        }
+
+        /// <summary>
+        /// Command function for opening dnSpy via shortcut key
+        /// </summary>
+        /// <param name="sender">The control that raised the event</param>
+        /// <param name="e">The arguments for this event</param>
+        private void OnOpenDnSpy(object sender, ExecutedRoutedEventArgs e)
+        {
+            selectedMod.DnSpyClick(sender, e);
+        }
+
+        /// <summary>
+        /// Command function for opening the mod folder via shortcut key
+        /// </summary>
+        /// <param name="sender">The control that raised the event</param>
+        /// <param name="e">The arguments for this event</param>
+        private void OnOpenExplorer(object sender, ExecutedRoutedEventArgs e)
+        {
+            selectedMod.FolderClick(sender, e);
+        }
+
+        /// <summary>
+        /// Command function for opening the Settings window via shortcut key
+        /// </summary>
+        /// <param name="sender">The control that raised the event</param>
+        /// <param name="e">The arguments for this event</param>
+        private void OnOpenSettings(object sender, ExecutedRoutedEventArgs e)
+        {
+            SettingsClick(sender, e);
+        }
+        #endregion
+
+        #region Event handlers
+        /// <summary>
+        /// Callback for handling when the user clicks the Settings button
+        /// </summary>
+        /// <param name="sender">The control that raised the event</param>
+        /// <param name="e">The arguments for this event</param>
+        private void SettingsClick(object sender, RoutedEventArgs e)
+        {
+            e.Handled = true;
+            ShowSettings();
+
+            // reload mods based on the settings
+            Task.Run(() => ViewModel.LoadMods(this));
+        }
+        #endregion
     }
 }
